@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: healthcheck-sa
+  namespace: default
+  annotations:
+    # Workload Identity - bind to your Azure Managed Identity client ID
+    azure.workload.identity/client-id: "bc755d68-31e6-46bc-82ba-3f77c48f59db"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthcheck
+  namespace: default
+spec:
+  replicas: 1        # This is just a utility app, 1 replica is fine
+  selector:
+    matchLabels:
+      app: healthcheck
+  template:
+    metadata:
+      labels:
+        app: healthcheck
+        azure.workload.identity/use: "true"   # Required for Workload Identity
+    spec:
+      serviceAccountName: healthcheck-sa
+      containers:
+        - name: healthcheck
+          image: sandmanacrsc-e4bmchbba5c2cveq.azurecr.io/healthcheck:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SQL_SERVER
+              value: "10.0.64.4"   # or private DNS name
+            - name: SQL_DATABASE
+              value: "test"
+            - name: SQL_USERNAME
+              value: "healthcheck"
+            - name: SQL_PASSWORD
+              value: "k8sapp1!" 
+            - name: REDIS_HOST
+              value: "Sandman-redis.southcentralus.redis.azure.net"
+            - name: REDIS_PORT
+              value: "10000"
+            - name: BLOB_APP_URL
+              value: "https://sandmanblobperm.blob.core.windows.net"
+            - name: BLOB_VENDOR_URL
+              value: "https://sandmanblobcache.blob.core.windows.net"
+            - name: ACR_URL
+              value: "https://sandmanacrsc-e4bmchbba5c2cveq.azurecr.io"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: healthcheck-svc
+  namespace: default
+spec:
+  selector:
+    app: healthcheck
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: ClusterIP     # Internal only - use kubectl port-forward to view locally

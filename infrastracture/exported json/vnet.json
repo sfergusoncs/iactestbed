@@ -1,0 +1,1984 @@
+{
+  "etag": "W/\"9411739b-26b1-4298-a3a9-0a4aea1738b9\"",
+  "extendedLocation": null,
+  "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/Sandman_RG_Main/providers/Microsoft.Network/virtualNetworks/Sandman_Vnet_Main_SC",
+  "identity": null,
+  "kind": null,
+  "location": "southcentralus",
+  "managedBy": null,
+  "name": "Sandman_Vnet_Main_SC",
+  "plan": null,
+  "properties": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/16"
+      ]
+    },
+    "enableDdosProtection": false,
+    "privateEndpointVNetPolicies": "Disabled",
+    "provisioningState": "Succeeded",
+    "resourceGuid": "54f6d2d6-42ed-44ac-8904-b9a0881d2f33",
+    "subnets": [
+      {
+        "etag": "W/\"9411739b-26b1-4298-a3a9-0a4aea1738b9\"",
+        "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/Sandman_RG_Main/providers/Microsoft.Network/virtualNetworks/Sandman_Vnet_Main_SC/subnets/subnet-Frontend-prod-southcentralus-001",
+        "name": "subnet-Frontend-prod-southcentralus-001",
+        "properties": {
+          "addressPrefixes": [
+            "10.0.72.0/22"
+          ],
+          "delegations": [],
+          "privateEndpointNetworkPolicies": "Disabled",
+          "privateLinkServiceNetworkPolicies": "Enabled",
+          "provisioningState": "Succeeded"
+        },
+        "resourceGroup": "Sandman_RG_Main",
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      },
+      {
+        "etag": "W/\"9411739b-26b1-4298-a3a9-0a4aea1738b9\"",
+        "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/Sandman_RG_Main/providers/Microsoft.Network/virtualNetworks/Sandman_Vnet_Main_SC/subnets/GatewaySubnet",
+        "name": "GatewaySubnet",
+        "properties": {
+          "addressPrefixes": [
+            "10.0.69.0/24"
+          ],
+          "delegations": [],
+          "privateEndpointNetworkPolicies": "Disabled",
+          "privateLinkServiceNetworkPolicies": "Enabled",
+          "provisioningState": "Succeeded"
+        },
+        "resourceGroup": "Sandman_RG_Main",
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      },
+      {
+        "etag": "W/\"9411739b-26b1-4298-a3a9-0a4aea1738b9\"",
+        "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/Sandman_RG_Main/providers/Microsoft.Network/virtualNetworks/Sandman_Vnet_Main_SC/subnets/subnet-db-prod-southcentralus-001",
+        "name": "subnet-db-prod-southcentralus-001",
+        "properties": {
+          "addressPrefixes": [
+            "10.0.64.0/22"
+          ],
+          "delegations": [],
+          "ipConfigurations": [
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/SANDMAN_RG_MAIN/providers/Microsoft.Network/networkInterfaces/SANDMAN-PE-REDIS.NIC.A42C0BEC-3620-4E02-AEC8-D201410BBB5A/ipConfigurations/PRIVATEENDPOINTIPCONFIG.9C1559AA-BF2A-43B9-B49C-AA12F114615F",
+              "resourceGroup": "SANDMAN_RG_MAIN"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/SANDMAN_RG_MAIN/providers/Microsoft.Network/networkInterfaces/SANDMAN-SQL-SC1496/ipConfigurations/IPCONFIG1",
+              "resourceGroup": "SANDMAN_RG_MAIN"
+            }
+          ],
+          "privateEndpointNetworkPolicies": "Disabled",
+          "privateEndpoints": [
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/SANDMAN_RG_MAIN/providers/Microsoft.Network/privateEndpoints/SANDMAN-PE-REDIS",
+              "resourceGroup": "SANDMAN_RG_MAIN"
+            }
+          ],
+          "privateLinkServiceNetworkPolicies": "Enabled",
+          "provisioningState": "Succeeded",
+          "purpose": "PrivateEndpoints"
+        },
+        "resourceGroup": "Sandman_RG_Main",
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      },
+      {
+        "etag": "W/\"9411739b-26b1-4298-a3a9-0a4aea1738b9\"",
+        "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/Sandman_RG_Main/providers/Microsoft.Network/virtualNetworks/Sandman_Vnet_Main_SC/subnets/SD-Wan",
+        "name": "SD-Wan",
+        "properties": {
+          "addressPrefixes": [
+            "10.0.70.0/25"
+          ],
+          "delegations": [],
+          "privateEndpointNetworkPolicies": "Disabled",
+          "privateLinkServiceNetworkPolicies": "Enabled",
+          "provisioningState": "Succeeded"
+        },
+        "resourceGroup": "Sandman_RG_Main",
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      },
+      {
+        "etag": "W/\"9411739b-26b1-4298-a3a9-0a4aea1738b9\"",
+        "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/Sandman_RG_Main/providers/Microsoft.Network/virtualNetworks/Sandman_Vnet_Main_SC/subnets/AzureBastionSubnet",
+        "name": "AzureBastionSubnet",
+        "properties": {
+          "addressPrefixes": [
+            "10.0.68.0/24"
+          ],
+          "delegations": [],
+          "ipConfigurations": [
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/SANDMAN_RG_MAIN/providers/Microsoft.Network/bastionHosts/SANDMAN_VNET_MAIN_SC-BASTION/bastionHostIpConfigurations/IPCONF",
+              "resourceGroup": "SANDMAN_RG_MAIN"
+            }
+          ],
+          "privateEndpointNetworkPolicies": "Disabled",
+          "privateLinkServiceNetworkPolicies": "Enabled",
+          "provisioningState": "Succeeded"
+        },
+        "resourceGroup": "Sandman_RG_Main",
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      },
+      {
+        "etag": "W/\"9411739b-26b1-4298-a3a9-0a4aea1738b9\"",
+        "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/Sandman_RG_Main/providers/Microsoft.Network/virtualNetworks/Sandman_Vnet_Main_SC/subnets/subnet-apps-prod-southcentralus-001",
+        "name": "subnet-apps-prod-southcentralus-001",
+        "properties": {
+          "addressPrefixes": [
+            "10.0.0.0/18"
+          ],
+          "delegations": [],
+          "ipConfigurations": [
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/providers/Microsoft.Network/loadBalancers/KUBERNETES-INTERNAL/frontendIPConfigurations/A2CD49AF807284F51BED79A66E536AE3",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/providers/Microsoft.Network/networkInterfaces/KUBE-APISERVER.NIC.D64BE37F-9F2A-43F4-965D-3137C5D35A9E/ipConfigurations/PRIVATEENDPOINTIPCONFIG.7A8EF438-0C51-4A68-8754-74E0F78F2429",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/providers/Microsoft.Network/networkInterfaces/PLS-A2CD49AF807284F51BED79A66E536AE3.NIC.72BBB8D7-DB6E-42F1-9613-D43406DE0780/ipConfigurations/SUBNET-APPS-PROD-SOUTHCENTRALUS-001-PLS-A2CD49AF807284F51BED79A66E536A-DYNAMIC-0",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG1",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG10",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG100",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG101",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG102",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG103",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG104",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG105",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG106",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG107",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG108",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG109",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG11",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG12",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG13",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG14",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG15",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG16",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG17",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG18",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG19",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG2",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG20",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG21",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG22",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG23",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG24",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG25",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG26",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG27",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG28",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG29",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG3",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG30",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG31",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG32",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG33",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG34",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG35",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG36",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG37",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG38",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG39",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG4",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG40",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG41",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG42",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG43",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG44",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG45",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG46",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG47",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG48",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG49",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG5",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG50",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG51",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG52",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG53",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG54",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG55",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG56",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG57",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG58",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG59",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG6",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG60",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG61",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG62",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG63",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG64",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG65",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG66",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG67",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG68",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG69",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG7",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG70",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG71",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG72",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG73",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG74",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG75",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG76",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG77",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG78",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG79",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG8",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG80",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG81",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG82",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG83",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG84",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG85",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG86",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG87",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG88",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG89",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG9",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG90",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG91",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG92",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG93",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG94",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG95",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG96",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG97",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG98",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG99",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG1",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG10",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG100",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG101",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG102",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG103",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG104",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG105",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG106",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG107",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG108",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG109",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG11",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG12",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG13",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG14",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG15",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG16",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG17",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG18",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG19",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG2",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG20",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG21",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG22",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG23",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG24",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG25",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG26",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG27",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG28",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG29",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG3",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG30",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG31",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG32",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG33",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG34",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG35",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG36",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG37",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG38",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG39",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG4",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG40",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG41",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG42",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG43",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG44",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG45",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG46",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG47",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG48",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG49",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG5",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG50",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG51",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG52",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG53",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG54",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG55",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG56",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG57",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG58",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG59",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG6",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG60",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG61",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG62",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG63",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG64",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG65",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG66",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG67",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG68",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG69",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG7",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG70",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG71",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG72",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG73",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG74",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG75",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG76",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG77",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG78",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG79",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG8",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG80",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG81",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG82",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG83",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG84",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG85",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG86",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG87",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG88",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG89",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG9",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG90",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG91",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG92",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG93",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG94",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG95",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG96",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG97",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG98",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-AGENTPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-AGENTPOOL-19586441-VMSS/ipConfigurations/IPCONFIG99",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG1",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG10",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG100",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG101",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG102",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG103",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG104",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG105",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG106",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG107",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG108",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG109",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG11",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG12",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG13",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG14",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG15",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG16",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG17",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG18",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG19",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG2",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG20",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG21",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG22",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG23",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG24",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG25",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG26",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG27",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG28",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG29",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG3",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG30",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG31",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG32",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG33",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG34",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG35",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG36",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG37",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG38",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG39",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG4",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG40",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG41",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG42",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG43",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG44",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG45",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG46",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG47",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG48",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG49",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG5",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG50",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG51",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG52",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG53",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG54",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG55",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG56",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG57",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG58",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG59",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG6",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG60",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG61",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG62",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG63",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG64",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG65",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG66",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG67",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG68",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG69",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG7",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG70",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG71",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG72",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG73",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG74",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG75",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG76",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG77",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG78",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG79",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG8",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG80",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG81",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG82",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG83",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG84",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG85",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG86",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG87",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG88",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG89",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG9",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG90",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG91",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG92",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG93",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG94",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG95",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG96",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG97",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG98",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/16/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG99",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG1",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG10",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG100",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG101",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG102",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG103",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG104",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG105",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG106",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG107",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG108",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG109",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG11",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG12",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG13",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG14",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG15",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG16",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG17",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG18",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG19",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG2",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG20",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG21",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG22",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG23",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG24",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG25",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG26",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG27",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG28",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG29",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG3",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG30",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG31",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG32",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG33",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG34",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG35",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG36",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG37",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG38",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG39",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG4",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG40",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG41",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG42",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG43",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG44",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG45",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG46",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG47",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG48",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG49",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG5",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG50",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG51",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG52",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG53",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG54",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG55",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG56",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG57",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG58",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG59",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG6",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG60",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG61",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG62",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG63",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG64",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG65",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG66",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG67",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG68",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG69",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG7",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG70",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG71",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG72",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG73",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG74",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG75",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG76",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG77",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG78",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG79",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG8",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG80",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG81",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG82",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG83",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG84",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG85",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG86",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG87",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG88",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG89",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG9",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG90",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG91",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG92",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG93",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG94",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG95",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG96",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG97",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG98",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/PROVIDERS/MICROSOFT.COMPUTE/VIRTUALMACHINESCALESETS/AKS-USERPOOL-19586441-VMSS/VIRTUALMACHINES/17/NETWORKINTERFACES/AKS-USERPOOL-19586441-VMSS/ipConfigurations/IPCONFIG99",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/providers/Microsoft.Network/privateLinkServices/PLS-A2CD49AF807284F51BED79A66E536AE3/ipConfigurations/SUBNET-APPS-PROD-SOUTHCENTRALUS-001-PLS-A2CD49AF807284F51BED79A66E536A-DYNAMIC-0",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/SANDMAN_RG_MAIN/providers/Microsoft.Network/networkInterfaces/K8SJUMPBOX908/ipConfigurations/IPCONFIG1",
+              "resourceGroup": "SANDMAN_RG_MAIN"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/SANDMAN_RG_MAIN/providers/Microsoft.Network/networkInterfaces/SANDMAN_PE_ACR-NIC/ipConfigurations/PRIVATEENDPOINTIPCONFIG.8420B852-2C8B-49A6-B77B-A8745D7D3ED4",
+              "resourceGroup": "SANDMAN_RG_MAIN"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/SANDMAN_RG_MAIN/providers/Microsoft.Network/networkInterfaces/SANDMAN_PE_ACR-NIC/ipConfigurations/PRIVATEENDPOINTIPCONFIG.868DA813-DD24-4D66-B106-3DBA2BFB30AB",
+              "resourceGroup": "SANDMAN_RG_MAIN"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/SANDMAN_RG_MAIN/providers/Microsoft.Network/networkInterfaces/SANDMAN_PE_BLOBCACHE-NIC/ipConfigurations/PRIVATEENDPOINTIPCONFIG.AA55D726-01D3-418A-957F-3F740018BABD",
+              "resourceGroup": "SANDMAN_RG_MAIN"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/SANDMAN_RG_MAIN/providers/Microsoft.Network/networkInterfaces/SANDMAN_PE_BLOBPERM-NIC/ipConfigurations/PRIVATEENDPOINTIPCONFIG.DF28DE3E-F8BA-43DA-BFC5-A54499AC93CF",
+              "resourceGroup": "SANDMAN_RG_MAIN"
+            }
+          ],
+          "privateEndpointNetworkPolicies": "Disabled",
+          "privateEndpoints": [
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS/providers/Microsoft.Network/privateEndpoints/KUBE-APISERVER",
+              "resourceGroup": "MC_SANDMAN_RG_MAIN_SANDMAN_AKS_SC_SOUTHCENTRALUS"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/SANDMAN_RG_MAIN/providers/Microsoft.Network/privateEndpoints/SANDMAN_PE_ACR",
+              "resourceGroup": "SANDMAN_RG_MAIN"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/SANDMAN_RG_MAIN/providers/Microsoft.Network/privateEndpoints/SANDMAN_PE_BLOBCACHE",
+              "resourceGroup": "SANDMAN_RG_MAIN"
+            },
+            {
+              "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/SANDMAN_RG_MAIN/providers/Microsoft.Network/privateEndpoints/SANDMAN_PE_BLOBPERM",
+              "resourceGroup": "SANDMAN_RG_MAIN"
+            }
+          ],
+          "privateLinkServiceNetworkPolicies": "Disabled",
+          "provisioningState": "Succeeded",
+          "purpose": "PrivateEndpoints"
+        },
+        "resourceGroup": "Sandman_RG_Main",
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "virtualNetworkPeerings": [
+      {
+        "etag": "W/\"9411739b-26b1-4298-a3a9-0a4aea1738b9\"",
+        "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/Sandman_RG_Main/providers/Microsoft.Network/virtualNetworks/Sandman_Vnet_Main_SC/virtualNetworkPeerings/peering-from-cloudshell-to-AKS",
+        "name": "peering-from-cloudshell-to-AKS",
+        "properties": {
+          "allowForwardedTraffic": false,
+          "allowGatewayTransit": false,
+          "allowVirtualNetworkAccess": false,
+          "doNotVerifyRemoteGateways": false,
+          "peerCompleteVnets": true,
+          "peeringState": "Connected",
+          "peeringSyncLevel": "FullyInSync",
+          "provisioningState": "Succeeded",
+          "remoteAddressSpace": {
+            "addressPrefixes": [
+              "10.255.0.0/16"
+            ]
+          },
+          "remoteVirtualNetwork": {
+            "id": "/subscriptions/1efd3d49-ec61-4a9a-9c0e-cd1911b4c4f4/resourceGroups/RG-CloudShell-PrivateClusterConnection-1773676475189/providers/Microsoft.Network/virtualNetworks/vnet-deploy-cloudshell-kzhsfr7ds7hpi",
+            "resourceGroup": "RG-CloudShell-PrivateClusterConnection-1773676475189"
+          },
+          "remoteVirtualNetworkAddressSpace": {
+            "addressPrefixes": [
+              "10.255.0.0/16"
+            ]
+          },
+          "resourceGuid": "d2eca21f-2826-0e1a-2ce2-415f13d7e5b7",
+          "routeServiceVips": {},
+          "useRemoteGateways": false
+        },
+        "resourceGroup": "Sandman_RG_Main",
+        "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings"
+      }
+    ]
+  },
+  "resourceGroup": "Sandman_RG_Main",
+  "sku": null,
+  "tags": {},
+  "type": "Microsoft.Network/virtualNetworks"
+}
