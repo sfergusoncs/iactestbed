@@ -9,11 +9,50 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+variables:
+  serviceConnection: 'sandman-azure-connection'
+  resourceGroup: 'sandman_rg_main'
+  location: 'southcentralus'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+stages:
+  - stage: Deploy_Sandbox
+    displayName: 'Deploy Sandbox Environment'
+    jobs:
+      - job: DeployInfrastructure
+        steps:
+          # Step 1 - Create Resource Group first
+          - task: AzureCLI@2
+            displayName: 'Create Resource Group'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az group create \
+                  --name sandman-rg-sandbox \
+                  --location southcentralus
+
+          # Step 2 - Deploy VNet into that RG
+          - task: AzureCLI@2
+            displayName: 'Validate VNet'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az deployment group what-if \
+                  --resource-group $(resourceGroup) \
+                  --template-file infrastructure/modules/vnet.bicep \
+                  --parameters infrastructure/parameters/sandbox/vnet.params.json
+
+          - task: AzureCLI@2
+            displayName: 'Deploy VNet'
+            inputs:
+               azureSubscription: $(serviceConnection)
+               scriptType: 'bash'
+               scriptLocation: 'inlineScript'
+               inlineScript: |
+                  az deployment group create \
+                    --resource-group sandman-rg-sandbox \
+                    --template-file infrastructure/modules/vnet.bicep \
+                    --parameters infrastructure/parameters/sandbox/vnet.params.json
