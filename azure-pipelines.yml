@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  serviceConnection: 'sandman-azure-connection'
+  serviceConnection: 'sandmansandbox'
   resourceGroup: 'sandman_rg_main'
   location: 'southcentralus'
 
