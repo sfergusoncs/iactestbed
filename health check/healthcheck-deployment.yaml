@@ -26,7 +26,8 @@ spec:
       serviceAccountName: healthcheck-sa
       containers:
         - name: healthcheck
-          image: sandmanacrsc-e4bmchbba5c2cveq.azurecr.io/healthcheck:latest
+          image: healthcheck-page:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8080
           env:
