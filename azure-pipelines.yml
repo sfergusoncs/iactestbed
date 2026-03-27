@@ -5,6 +5,23 @@
 
 trigger: none
 
+parameters:
+  - name: environment
+    displayName: 'Environment'
+    type: string
+    default: 'dev'
+    values:
+      - dev
+      - uat
+      - qa
+      - prod
+      - sandbox
+
+  - name: subscriptionId
+    displayName: 'Target Subscription ID'
+    type: string
+    default: ''
+
 pool:
   vmImage: ubuntu-latest
 
