@@ -11,7 +11,7 @@ pool:
 
 variables:
   serviceConnection: 'sandmansandbox'
-  resourceGroup: 'sandman_rg_main'
+  resourceGroup: 'sandman-rg-sandbox'
   location: 'southcentralus'
 
 stages:
@@ -29,7 +29,7 @@ stages:
               scriptLocation: 'inlineScript'
               inlineScript: |
                 az group create \
-                  --name sandman-rg-sandbox \
+                  --name $(resourcegroup) \
                   --location southcentralus
 
           # Step 2 - Deploy VNet into that RG
