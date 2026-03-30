@@ -32,6 +32,7 @@ pool:
 
 variables:
   serviceConnection: 'sandmansandbox'
+  location: 'southcentralus'
 
 stages:
 
@@ -83,7 +84,19 @@ stages:
                   xargs -I {} az group delete \
                     --name {} \
                     --subscription ${{ parameters.subscriptionId }} \
-                    --yes --no-wait
+                    --yes
 
                 echo "Teardown initiated for all resource groups in ${{ parameters.environment }}."
-                echo "Deletions are running in the background via --no-wait."
+                echo "All RG's have been deleted"
+          - task: AzureCLI@2
+            displayName: 'purge keyvaul'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az keyvault purge \
+                  --name sandman-kv-${{ parameters.environment }} \
+                  --location $(location) \
+                  --subscription ${{ parameters.subscriptionId }}
+
