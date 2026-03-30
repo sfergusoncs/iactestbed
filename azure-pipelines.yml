@@ -27,8 +27,9 @@ pool:
 
 variables:
   serviceConnection: 'sandmansandbox'
-  resourceGroup: 'sandman-rg-sandbox'
   location: 'southcentralus'
+  resourceGroup: 'sandman-rg-${{ parameters.environment }}'
+  parametersPath: 'infrastructure/parameters/${{ parameters.environment }}'
 
 stages:
   - stage: Deploy_Sandbox
@@ -69,6 +70,6 @@ stages:
                scriptLocation: 'inlineScript'
                inlineScript: |
                   az deployment group create \
-                    --resource-group sandman-rg-sandbox \
+                    --resource-group $(resourceGroup) \
                     --template-file infrastructure/modules/vnet.bicep \
                     --parameters infrastructure/parameters/sandbox/vnet.params.json
