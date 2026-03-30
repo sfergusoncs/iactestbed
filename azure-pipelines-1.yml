@@ -1,0 +1,89 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger: none
+
+parameters:
+  - name: environment
+    displayName: 'Environment'
+    type: string
+    default: 'dev'
+    values:
+      - dev
+      - uat
+      - qa
+      - prod
+      - sandbox
+
+  - name: subscriptionId
+    displayName: 'Target Subscription ID'
+    type: string
+    default: ''
+
+   - name: confirm
+    displayName: 'Type the environment name to confirm'
+    type: string
+    default: ''
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  serviceConnection: 'sandmansandbox'
+
+stages:
+
+  # Stage 1 - Validate confirmation before touching anything
+  - stage: Validate
+    displayName: 'Validate Confirmation'
+    jobs:
+      - job: ConfirmDestruction
+        displayName: 'Check confirmation matches environment'
+        steps:
+          - script: |
+              if [ "${{ parameters.confirm }}" != "${{ parameters.environment }}" ]; then
+                echo "##[error] Confirmation '${{ parameters.confirm }}' does not match environment '${{ parameters.environment }}'. Aborting."
+                exit 1
+              fi
+              echo "Confirmation matched. Proceeding with teardown of ${{ parameters.environment }} in subscription ${{ parameters.subscriptionId }}."
+            displayName: 'Validate Confirmation'
+
+  # Stage 2 - Teardown all resource groups in the subscription
+  - stage: Teardown
+    displayName: 'Teardown ${{ parameters.environment }}'
+    dependsOn: Validate
+    jobs:
+      - job: DeleteResourceGroups
+        displayName: 'Delete all resource groups'
+        steps:
+          - task: AzureCLI@2
+            displayName: 'List resource groups to be deleted'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                echo "The following resource groups will be deleted:"
+                az group list \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --query "[].name" -o tsv
+
+          - task: AzureCLI@2
+            displayName: 'Delete all resource groups'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az group list \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --query "[].name" -o tsv | \
+                  xargs -I {} az group delete \
+                    --name {} \
+                    --subscription ${{ parameters.subscriptionId }} \
+                    --yes --no-wait
+
+                echo "Teardown initiated for all resource groups in ${{ parameters.environment }}."
+                echo "Deletions are running in the background via --no-wait."
