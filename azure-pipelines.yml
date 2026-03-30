@@ -22,6 +22,11 @@ parameters:
     type: string
     default: ''
 
+  - name: jumpbox password  
+    displayName: 'Jumpbox Admin Password'
+    type: string
+    default: ''
+
 pool:
   vmImage: ubuntu-latest
 
@@ -41,7 +46,7 @@ stages:
           - task: AzureCLI@2
             displayName: 'Create Resource Group'
             inputs:
-              azureSubscription: $(serviceConnection)
+              azureSubscription: $parameters.subscriptionId
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
@@ -49,18 +54,49 @@ stages:
                   --name $(resourcegroup) \
                   --location southcentralus
 
-          # Step 2 - Deploy VNet into that RG
+          # Step 2 - Create a Keyvault in that RG
+          - task: AzureCLI@2
+            displayName: 'Create Keyvault'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az keyvault create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name sandman-kv-${{ parameters.environment }} \
+                  --location $(location) \
+                  --enable-rbac-authorization true \
+                  --public-network-access disabled \
+                  --tags app=sandman
+
+          # Step 3 - create keyvault secrets 
+          - task: AzureCLI@2
+            displayName: 'Create Keyvault Secrets'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az keyvault secret set \
+                  --vault-name sandman-kv-${{ parameters.environment }} \
+                  --name 'JumpboxAdminPassword' \
+                  --value '${{ parameters.jumpbox password }}'
+
+
+          # Step 4 - Deploy VNet into that RG
           - task: AzureCLI@2
             displayName: 'Validate VNet'
             inputs:
-              azureSubscription: $(serviceConnection)
+              azureSubscription: $parameters.subscriptionId
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
                 az deployment group what-if \
                   --resource-group $(resourceGroup) \
                   --template-file infrastructure/modules/vnet.bicep \
-                  --parameters infrastructure/parameters/sandbox/vnet.params.json
+                  --parameters $(parametersPath)/vnet.params.json
 
           - task: AzureCLI@2
             displayName: 'Deploy VNet'
@@ -72,4 +108,4 @@ stages:
                   az deployment group create \
                     --resource-group $(resourceGroup) \
                     --template-file infrastructure/modules/vnet.bicep \
-                    --parameters infrastructure/parameters/sandbox/vnet.params.json
+                    --parameters $(parametersPath)/vnet.params.json
