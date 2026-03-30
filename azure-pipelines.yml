@@ -70,7 +70,8 @@ stages:
                   --location $(location) \
                   --enable-rbac-authorization true \
                   --public-network-access disabled \
-                  --tags app=sandman
+                  --tags app=sandman \
+                  --retention-days 7
 
           # Step 3 - assign KV permissions
           - task: AzureCLI@2
@@ -131,4 +132,5 @@ stages:
                     --subscription ${{ parameters.subscriptionId }} \
                     --resource-group $(resourceGroup) \
                     --template-file infrastructure/modules/vnet.bicep \
+                    --tags app=sandman \
                     --parameters $(parametersPath)/vnet.params.json
