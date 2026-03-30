@@ -73,25 +73,8 @@ stages:
                   --tags app=sandman \
                   --retention-days 7
 
-          # Step 3 - assign KV permissions
-          - task: AzureCLI@2
-            displayName: 'assign KV permissions'
-            inputs:
-              azureSubscription: $(serviceConnection)
-              scriptType: 'bash'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-               SP_OBJECT_ID=$(az ad sp show \
-                --id $(az account show --query user.name -o tsv) \
-                --query id -o tsv)
-
-                az role assignment create \
-                    --role "Key Vault Secrets Officer" \
-                    --assignee $SP_OBJECT_ID \
-                    --scope /subscriptions/${{ parameters.subscriptionId }}
-
           
-          # Step 4 - create keyvault secrets 
+          # Step 3 - create keyvault secrets 
           - task: AzureCLI@2
             displayName: 'Create Keyvault Secrets'
             inputs:
@@ -107,7 +90,7 @@ stages:
                   
 
 
-          # Step 5 - Deploy VNet into that RG
+          # Step 4 - Deploy VNet into that RG
           - task: AzureCLI@2
             displayName: 'Validate VNet'
             inputs:
