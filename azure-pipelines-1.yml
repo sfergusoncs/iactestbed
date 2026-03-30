@@ -22,7 +22,7 @@ parameters:
     type: string
     default: ''
 
-   - name: confirm
+  - name: confirm
     displayName: 'Type the environment name to confirm'
     type: string
     default: ''
