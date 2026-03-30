@@ -22,10 +22,11 @@ parameters:
     type: string
     default: ''
 
-  - name: jumpbox password  
-    displayName: 'Jumpbox Admin Password'
+  - name: VMpassword  
+    displayName: 'VMPassword'
     type: string
     default: ''
+    secret: true
 
 pool:
   vmImage: ubuntu-latest
@@ -46,13 +47,14 @@ stages:
           - task: AzureCLI@2
             displayName: 'Create Resource Group'
             inputs:
-              azureSubscription: $parameters.subscriptionId
+              azureSubscription: $(serviceConnection)
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
                 az group create \
-                  --name $(resourcegroup) \
-                  --location southcentralus
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --name $(resourceGroup) \
+                  --location $(location)
 
           # Step 2 - Create a Keyvault in that RG
           - task: AzureCLI@2
@@ -80,20 +82,23 @@ stages:
               scriptLocation: 'inlineScript'
               inlineScript: |
                 az keyvault secret set \
+                  --subscription ${{ parameters.subscriptionId }} \
                   --vault-name sandman-kv-${{ parameters.environment }} \
                   --name 'JumpboxAdminPassword' \
-                  --value '${{ parameters.jumpbox password }}'
+                  --value '${{ parameters.VMpassword }}'
+                  
 
 
           # Step 4 - Deploy VNet into that RG
           - task: AzureCLI@2
             displayName: 'Validate VNet'
             inputs:
-              azureSubscription: $parameters.subscriptionId
+              azureSubscription: $(serviceConnection)
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
                 az deployment group what-if \
+                  --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
                   --template-file infrastructure/modules/vnet.bicep \
                   --parameters $(parametersPath)/vnet.params.json
@@ -106,6 +111,7 @@ stages:
                scriptLocation: 'inlineScript'
                inlineScript: |
                   az deployment group create \
+                    --subscription ${{ parameters.subscriptionId }} \
                     --resource-group $(resourceGroup) \
                     --template-file infrastructure/modules/vnet.bicep \
                     --parameters $(parametersPath)/vnet.params.json
