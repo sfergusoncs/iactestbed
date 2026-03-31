@@ -31,7 +31,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  serviceConnection: 'sandmansandbox'
+  serviceConnection: 'sandman-${{ parameters.environment }}-sc'
   location: 'southcentralus'
 
 stages:
