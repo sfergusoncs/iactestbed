@@ -93,21 +93,31 @@ stages:
                scriptType: 'bash'
                scriptLocation: 'inlineScript'
                inlineScript: |
-                  output=$(az deployment group create \
+                  az deployment group create \
                       --subscription ${{ parameters.subscriptionId }} \
                       --resource-group $(resourceGroup) \
                       --template-file infrastructure/modules/vnet.bicep \
                       --parameters $(parametersPath)/vnet.params.json \
                       --parameters environment=${{ parameters.environment }} \
-                      --parameters location=$(location) \
-                      --query 'properties.outputs' \
-                      --output json)
+                      --parameters location=$(location)
 
+                  vnetId=$(az network vnet show \
+                      --subscription ${{ parameters.subscriptionId }} \
+                      --resource-group $(resourceGroup) \
+                      --name sandman-vnet-${{ parameters.environment }} \
+                      --query 'id' \
+                      --output tsv)
 
-                  vnetId=$(echo $output | jq -r '.vnetId.value')
-                  subnetId=$(echo $output | jq -r '.peSubnetId.value')
+                  peSubnetId=$(az network vnet subnet show \
+                      --subscription ${{ parameters.subscriptionId }} \
+                      --resource-group $(resourceGroup) \
+                      --vnet-name sandman-vnet-${{ parameters.environment }} \
+                      --name sandman-snet-pe \
+                      --query 'id' \
+                      --output tsv)
+
                   echo "##vso[task.setvariable variable=vnetId;isOutput=true]$vnetId"
-                  echo "##vso[task.setvariable variable=peSubnetId;isOutput=true]$subnetId"
+                  echo "##vso[task.setvariable variable=peSubnetId;isOutput=true]$peSubnetId"
 
             # deploy ACR
           - task: AzureCLI@2
