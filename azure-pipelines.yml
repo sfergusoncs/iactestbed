@@ -45,6 +45,21 @@ stages:
                   --name $(resourceGroup) \
                   --location $(location)
 
+              # Create RSV Resource Group (prod only)
+          - task: AzureCLI@2
+            displayName: 'Create RSV Resource Group'
+            condition: eq('${{ parameters.environment }}', 'prod')
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az group create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --name sandman-rg-rsv-${{ parameters.environment }} \
+                  --location $(location)
+
+              
           # Create Key Vault
           - task: AzureCLI@2
             displayName: 'Create Keyvault'
@@ -140,6 +155,53 @@ stages:
                   --resource-group $(resourceGroup) \
                   --template-file infrastructure/modules/blobcache.bicep \
                   --parameters $(parametersPath)/blobcache.params.json \
+                  --parameters environment=${{ parameters.environment }} \
+                  --parameters location=$(location) \
+                  --parameters subnetId="$peSubnetId" \
+                  --parameters vnetId="$vnetId"
+
+          # Create RSV Resource Group (prod only)
+          - task: AzureCLI@2
+            displayName: 'Create RSV Resource Group'
+            condition: eq('${{ parameters.environment }}', 'prod')
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az group create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --name sandman-rg-rsv-${{ parameters.environment }} \
+                  --location $(location)
+
+          # Deploy Blob Perm Storage
+          - task: AzureCLI@2
+            displayName: 'Deploy Blob Perm Storage'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                peSubnetId=$(az network vnet subnet show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --vnet-name $(vnetName) \
+                  --name sandman-snet-pe \
+                  --query 'id' \
+                  --output tsv)
+
+                vnetId=$(az network vnet show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name $(vnetName) \
+                  --query 'id' \
+                  --output tsv)
+
+                az deployment group create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --template-file infrastructure/modules/blobperm.bicep \
+                  --parameters $(parametersPath)/blobperm.params.json \
                   --parameters environment=${{ parameters.environment }} \
                   --parameters location=$(location) \
                   --parameters subnetId="$peSubnetId" \
