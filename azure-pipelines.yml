@@ -21,6 +21,11 @@ parameters:
     type: string
     default: ''
 
+  - name: VMpassword  
+    displayName: 'VMPassword'
+    type: string
+    default: ''
+
 pool:
   vmImage: ubuntu-latest
 
@@ -68,7 +73,7 @@ stages:
                   --retention-days 7 || echo "keyvault already exists, skipping"
 
 
-          # Deploy VNet into that RG
+          # Validate a vnet can be deployed
           - task: AzureCLI@2
             displayName: 'Validate VNet'
             inputs:
@@ -84,8 +89,9 @@ stages:
                   --parameters environment=${{ parameters.environment }} \
                   --parameters location=$(location)
                   
-
+          # Create Vnet and capture outputs
           - task: AzureCLI@2
+            name: deployVnet
             displayName: 'Deploy VNet'
             inputs:
                azureSubscription: $(serviceConnection)
@@ -93,14 +99,14 @@ stages:
                scriptLocation: 'inlineScript'
                inlineScript: |
                   output=$(az deployment group create \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
-                  --template-file infrastructure/modules/vnet.bicep \
-                  --parameters $(parametersPath)/vnet.params.json \
-                  --parameters environment=${{ parameters.environment }} \
-                  --parameters location=$(location) \
-                  --query 'properties.outputs' \
-                  --output json)
+                      --subscription ${{ parameters.subscriptionId }} \
+                      --resource-group $(resourceGroup) \
+                      --template-file infrastructure/modules/vnet.bicep \
+                      --parameters $(parametersPath)/vnet.params.json \
+                      --parameters environment=${{ parameters.environment }} \
+                      --parameters location=$(location) \
+                      --query 'properties.outputs' \
+                      --output json)
 
 
                   vnetId=$(echo $output | jq -r '.vnetId.value')
@@ -117,11 +123,11 @@ stages:
                scriptLocation: 'inlineScript'
                inlineScript: |
                   az deployment group create \
-                  --subscription ${{ parameters.subscriptionId }} \
+                    --subscription ${{ parameters.subscriptionId }} \
                     --resource-group $(resourceGroup) \
                     --template-file infrastructure/modules/acr.bicep \
                     --parameters $(parametersPath)/acr.params.json \
                     --parameters environment=${{ parameters.environment }} \
-                    --parameters location=$(location)
-                    --parameters subnetId='$(deployVnet.peSubnetId)' \
-                    --parameters vnetId='$(deployVnet.vnetId)'
+                    --parameters location=$(location) \
+                    --parameters subnetId='$(DeployInfrastructure.deployVnet.peSubnetId)' \
+                    --parameters vnetId='$(DeployInfrastructure.deployVnet.vnetId)'
