@@ -2,71 +2,28 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "vnetName": { "value": "Sandman_Vnet_Main_SC" },
-    "location": { "value": "southcentralus" },
     "addressPrefixes": { "value": [ "10.1.0.0/16" ] },
     "enableDdosProtection": { "value": false },
-    "tags": { "value": {} },
     "subnets": {
       "value": [
         {
-          "name": "subnet-Frontend-prod-southcentralus-001",
+          "name": "sandman-snet-aks",
           "properties": {
-            "addressPrefix": "10.1.72.0/22",
+            "addressPrefix": "10.1.0.0/22",
             "delegations": [],
             "privateEndpointNetworkPolicies": "Disabled",
             "privateLinkServiceNetworkPolicies": "Enabled"
           }
-        },
+        },    
         {
-          "name": "GatewaySubnet",
+          "name": "sandman-snet-pe",
           "properties": {
-            "addressPrefix": "10.1.69.0/24",
+            "addressPrefix": "10.1.4.0/24",
             "delegations": [],
             "privateEndpointNetworkPolicies": "Disabled",
             "privateLinkServiceNetworkPolicies": "Enabled"
           }
-        },
-        {
-          "name": "subnet-db-prod-southcentralus-001",
-          "properties": {
-            "addressPrefix": "10.1.64.0/22",
-            "delegations": [],
-            "privateEndpointNetworkPolicies": "Disabled",
-            "privateLinkServiceNetworkPolicies": "Enabled",
-            "privateEndpoints": [
-              { "id": "<redacted-resource-id>" }
-            ]
-          }
-        },
-        {
-          "name": "SD-Wan",
-          "properties": {
-            "addressPrefix": "10.1.70.0/25",
-            "delegations": [],
-            "privateEndpointNetworkPolicies": "Disabled",
-            "privateLinkServiceNetworkPolicies": "Enabled"
-          }
-        },
-        {
-          "name": "AzureBastionSubnet",
-          "properties": {
-            "addressPrefix": "10.1.68.0/24",
-            "delegations": [],
-            "privateEndpointNetworkPolicies": "Disabled",
-            "privateLinkServiceNetworkPolicies": "Enabled",
-            "ipConfigurations": [ { "id": "<redacted-resource-id>" } ]
-          }
-        },
-        {
-          "name": "subnet-apps-prod-southcentralus-001",
-          "properties": {
-            "addressPrefix": "10.1.0.0/18",
-            "delegations": [],
-            "privateEndpointNetworkPolicies": "Disabled",
-            "privateLinkServiceNetworkPolicies": "Enabled"
-          }
-        }
+        }    
       ]
     }
   }

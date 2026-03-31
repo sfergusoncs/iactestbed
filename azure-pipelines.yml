@@ -13,7 +13,6 @@ parameters:
     values:
       - dev
       - uat
-      - qa
       - prod
       - sandbox
 
@@ -31,18 +30,18 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  serviceConnection: 'sandmansandbox'
+  serviceConnection: 'sandman-${{ parameters.environment }}-sc'
   location: 'southcentralus'
   resourceGroup: 'sandman-rg-${{ parameters.environment }}'
   parametersPath: 'infrastructure/parameters/${{ parameters.environment }}'
 
 stages:
-  - stage: Deploy_Sandbox
-    displayName: 'Deploy Sandbox Environment'
+  - stage: Deploy
+    displayName: 'Deploy ${{ parameters.environment }} Environment'
     jobs:
       - job: DeployInfrastructure
         steps:
-          # Step 1 - Create Resource Group first
+          # Create Resource Group first
           - task: AzureCLI@2
             displayName: 'Create Resource Group'
             inputs:
@@ -55,7 +54,7 @@ stages:
                   --name $(resourceGroup) \
                   --location $(location)
 
-          # Step 2 - Create a Keyvault in that RG
+          # Create a Keyvault in that RG
           - task: AzureCLI@2
             displayName: 'Create Keyvault'
             inputs:
@@ -73,24 +72,8 @@ stages:
                   --tags app=sandman \
                   --retention-days 7 || echo "keyvault already exists, skipping"
 
-          
-          # Step 3 - create keyvault secrets 
-          - task: AzureCLI@2
-            displayName: 'Create Keyvault Secrets'
-            inputs:
-              azureSubscription: $(serviceConnection)
-              scriptType: 'bash'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                az keyvault secret set \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --vault-name sandman-kv-${{ parameters.environment }} \
-                  --name 'JumpboxAdminPassword' \
-                  --value '${{ parameters.VMpassword }}'
-                  
 
-
-          # Step 4 - Deploy VNet into that RG
+          # Deploy VNet into that RG
           - task: AzureCLI@2
             displayName: 'Validate VNet'
             inputs:
@@ -102,7 +85,10 @@ stages:
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
                   --template-file infrastructure/modules/vnet.bicep \
-                  --parameters $(parametersPath)/vnet.params.json
+                  --parameters $(parametersPath)/vnet.params.json \
+                  --parameters environment=${{ parameters.environment }} \
+                  --parameters location=$(location)
+                  
 
           - task: AzureCLI@2
             displayName: 'Deploy VNet'
@@ -111,8 +97,36 @@ stages:
                scriptType: 'bash'
                scriptLocation: 'inlineScript'
                inlineScript: |
+                  output=$(az deployment group create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --template-file infrastructure/modules/vnet.bicep \
+                  --parameters $(parametersPath)/vnet.params.json \
+                  --parameters environment=${{ parameters.environment }} \
+                  --parameters location=$(location) \
+                  --query 'properties.outputs' \
+                  --output json)
+
+
+                  vnetId=$(echo $output | jq -r '.vnetId.value')
+                  subnetId=$(echo $output | jq -r '.peSubnetId.value')
+                  echo "##vso[task.setvariable variable=vnetId;isOutput=true]$vnetId"
+                  echo "##vso[task.setvariable variable=peSubnetId;isOutput=true]$subnetId"
+
+            # deploy ACR
+          - task: AzureCLI@2
+            displayName: 'Deploy ACR'
+            inputs:
+               azureSubscription: $(serviceConnection)
+               scriptType: 'bash'
+               scriptLocation: 'inlineScript'
+               inlineScript: |
                   az deployment group create \
-                    --subscription ${{ parameters.subscriptionId }} \
+                  --subscription ${{ parameters.subscriptionId }} \
                     --resource-group $(resourceGroup) \
-                    --template-file infrastructure/modules/vnet.bicep \
-                    --parameters $(parametersPath)/vnet.params.json
+                    --template-file infrastructure/modules/acr.bicep \
+                    --parameters $(parametersPath)/acr.params.json \
+                    --parameters environment=${{ parameters.environment }} \
+                    --parameters location=$(location)
+                    --parameters subnetId='$(deployVnet.peSubnetId)' \
+                    --parameters vnetId='$(deployVnet.vnetId)'

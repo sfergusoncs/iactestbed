@@ -1,12 +1,16 @@
-param vnetName string
 param location string = resourceGroup().location
 param addressPrefixes array
 param subnets array
 param enableDdosProtection bool = false
-param tags object = {}
+param environment string
+
+var tags = {
+  app: 'sandman'
+  env: environment
+}
 
 resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
-  name: vnetName
+  name: 'Sandman-Vnet-${environment}'
   location: location
   tags: tags
   properties: {
@@ -27,3 +31,8 @@ resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
     ]
   }
 }
+
+output vnetId string = vnet.id
+output vnetName string = vnet.name
+output aksSubnetId string = vnet.properties.subnets[0].id
+output peSubnetId string = vnet.properties.subnets[1].id
