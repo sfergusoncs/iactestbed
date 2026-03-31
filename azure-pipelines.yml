@@ -136,3 +136,21 @@ stages:
                     --parameters location=$(location) \
                     --parameters subnetId='$(DeployInfrastructure.deployVnet.peSubnetId)' \
                     --parameters vnetId='$(DeployInfrastructure.deployVnet.vnetId)'
+
+            # Deploy Blob Cache Storage
+          - task: AzureCLI@2
+            displayName: 'Deploy Blob Cache Storage'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az deployment group create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --template-file infrastructure/modules/blobcache.bicep \
+                  --parameters $(parametersPath)/blobcache.params.json \
+                  --parameters environment=${{ parameters.environment }} \
+                  --parameters location=$(location) \
+                  --parameters subnetId='$(DeployInfrastructure.deployVnet.peSubnetId)' \
+                  --parameters vnetId='$(DeployInfrastructure.deployVnet.vnetId)'
