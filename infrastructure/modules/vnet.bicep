@@ -10,7 +10,7 @@ var tags = {
 }
 
 resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
-  name: 'Sandman-Vnet-${environment}'
+  name: 'sandman-snet-${environment}'
   location: location
   tags: tags
   properties: {
