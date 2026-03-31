@@ -20,7 +20,6 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2025-11-01' =
   tags: tags
   sku: {
     name: 'Premium'
-    tier: 'Premium'
   }
   properties: {
     adminUserEnabled: false
@@ -73,7 +72,7 @@ resource acrPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
       {
         name: 'sandman-pe-acr-${environment}'
         properties: {
-          privateLinkResourceId: containerRegistry.id
+          privateLinkServiceId: containerRegistry.id
           groupIds: [
             'registry'
           ]
