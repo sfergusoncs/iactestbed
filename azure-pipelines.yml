@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger: none
 
 parameters:
@@ -29,6 +24,7 @@ variables:
   location: 'southcentralus'
   resourceGroup: 'sandman-rg-${{ parameters.environment }}'
   parametersPath: 'infrastructure/parameters/${{ parameters.environment }}'
+  vnetName: 'sandman-vnet-${{ parameters.environment }}'
 
 stages:
   - stage: Deploy
@@ -36,7 +32,7 @@ stages:
     jobs:
       - job: DeployInfrastructure
         steps:
-          # Create Resource Group first
+          # Create Resource Group
           - task: AzureCLI@2
             displayName: 'Create Resource Group'
             inputs:
@@ -49,7 +45,7 @@ stages:
                   --name $(resourceGroup) \
                   --location $(location)
 
-          # Create a Keyvault in that RG
+          # Create Key Vault
           - task: AzureCLI@2
             displayName: 'Create Keyvault'
             inputs:
@@ -67,79 +63,9 @@ stages:
                   --tags app=sandman \
                   --retention-days 7 || echo "keyvault already exists, skipping"
 
-
-          # Validate a vnet can be deployed
+          # Deploy VNet
           - task: AzureCLI@2
-            displayName: 'Validate VNet'
-            inputs:
-              azureSubscription: $(serviceConnection)
-              scriptType: 'bash'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                az deployment group what-if \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
-                  --template-file infrastructure/modules/vnet.bicep \
-                  --parameters $(parametersPath)/vnet.params.json \
-                  --parameters environment=${{ parameters.environment }} \
-                  --parameters location=$(location)
-                  
-          # Create Vnet and capture outputs
-          - task: AzureCLI@2
-            name: deployVnet
             displayName: 'Deploy VNet'
-            inputs:
-               azureSubscription: $(serviceConnection)
-               scriptType: 'bash'
-               scriptLocation: 'inlineScript'
-               inlineScript: |
-                  az deployment group create \
-                      --subscription ${{ parameters.subscriptionId }} \
-                      --resource-group $(resourceGroup) \
-                      --template-file infrastructure/modules/vnet.bicep \
-                      --parameters $(parametersPath)/vnet.params.json \
-                      --parameters environment=${{ parameters.environment }} \
-                      --parameters location=$(location)
-
-                  vnetId=$(az network vnet show \
-                      --subscription ${{ parameters.subscriptionId }} \
-                      --resource-group $(resourceGroup) \
-                      --name sandman-vnet-${{ parameters.environment }} \
-                      --query 'id' \
-                      --output tsv)
-
-                  peSubnetId=$(az network vnet subnet show \
-                      --subscription ${{ parameters.subscriptionId }} \
-                      --resource-group $(resourceGroup) \
-                      --vnet-name sandman-vnet-${{ parameters.environment }} \
-                      --name sandman-snet-pe \
-                      --query 'id' \
-                      --output tsv)
-
-                  echo "##vso[task.setvariable variable=vnetId;isOutput=true]$vnetId"
-                  echo "##vso[task.setvariable variable=peSubnetId;isOutput=true]$peSubnetId"
-
-            # deploy ACR
-          - task: AzureCLI@2
-            displayName: 'Deploy ACR'
-            inputs:
-               azureSubscription: $(serviceConnection)
-               scriptType: 'bash'
-               scriptLocation: 'inlineScript'
-               inlineScript: |
-                  az deployment group create \
-                    --subscription ${{ parameters.subscriptionId }} \
-                    --resource-group $(resourceGroup) \
-                    --template-file infrastructure/modules/acr.bicep \
-                    --parameters $(parametersPath)/acr.params.json \
-                    --parameters environment=${{ parameters.environment }} \
-                    --parameters location=$(location) \
-                    --parameters subnetId='$(DeployInfrastructure.deployVnet.peSubnetId)' \
-                    --parameters vnetId='$(DeployInfrastructure.deployVnet.vnetId)'
-
-            # Deploy Blob Cache Storage
-          - task: AzureCLI@2
-            displayName: 'Deploy Blob Cache Storage'
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -148,9 +74,73 @@ stages:
                 az deployment group create \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
+                  --template-file infrastructure/modules/vnet.bicep \
+                  --parameters $(parametersPath)/vnet.params.json \
+                  --parameters environment=${{ parameters.environment }} \
+                  --parameters location=$(location)
+
+          # Deploy ACR
+          - task: AzureCLI@2
+            displayName: 'Deploy ACR'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                peSubnetId=$(az network vnet subnet show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --vnet-name $(vnetName) \
+                  --name sandman-snet-pe \
+                  --query 'id' \
+                  --output tsv)
+
+                vnetId=$(az network vnet show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name $(vnetName) \
+                  --query 'id' \
+                  --output tsv)
+
+                az deployment group create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --template-file infrastructure/modules/acr.bicep \
+                  --parameters $(parametersPath)/acr.params.json \
+                  --parameters environment=${{ parameters.environment }} \
+                  --parameters location=$(location) \
+                  --parameters subnetId="$peSubnetId" \
+                  --parameters vnetId="$vnetId"
+
+          # Deploy Blob Cache Storage
+          - task: AzureCLI@2
+            displayName: 'Deploy Blob Cache Storage'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                peSubnetId=$(az network vnet subnet show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --vnet-name $(vnetName) \
+                  --name sandman-snet-pe \
+                  --query 'id' \
+                  --output tsv)
+
+                vnetId=$(az network vnet show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name $(vnetName) \
+                  --query 'id' \
+                  --output tsv)
+
+                az deployment group create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
                   --template-file infrastructure/modules/blobcache.bicep \
                   --parameters $(parametersPath)/blobcache.params.json \
                   --parameters environment=${{ parameters.environment }} \
                   --parameters location=$(location) \
-                  --parameters subnetId='$(DeployInfrastructure.deployVnet.peSubnetId)' \
-                  --parameters vnetId='$(DeployInfrastructure.deployVnet.vnetId)'
+                  --parameters subnetId="$peSubnetId" \
+                  --parameters vnetId="$vnetId"
