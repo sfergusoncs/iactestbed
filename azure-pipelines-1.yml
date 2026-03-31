@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger: none
 
 parameters:
@@ -33,10 +28,11 @@ pool:
 variables:
   serviceConnection: 'sandman-${{ parameters.environment }}-sc'
   location: 'southcentralus'
+  rsvRG: 'sandman-rg-rsv-${{ parameters.environment }}'
 
 stages:
 
-  # Stage 1 - Validate confirmation before touching anything
+  # Validate confirmation before touching anything
   - stage: Validate
     displayName: 'Validate Confirmation'
     jobs:
@@ -51,13 +47,13 @@ stages:
               echo "Confirmation matched. Proceeding with teardown of ${{ parameters.environment }} in subscription ${{ parameters.subscriptionId }}."
             displayName: 'Validate Confirmation'
 
-  # Stage 2 - Teardown all resource groups in the subscription
+  # Teardown all resource groups except RSV
   - stage: Teardown
     displayName: 'Teardown ${{ parameters.environment }}'
     dependsOn: Validate
     jobs:
       - job: DeleteResourceGroups
-        displayName: 'Delete all resource groups'
+        displayName: 'Delete resource groups'
         steps:
           - task: AzureCLI@2
             displayName: 'List resource groups to be deleted'
@@ -66,30 +62,39 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
+                EXCLUDE="$(rsvRG)"
+
                 echo "The following resource groups will be deleted:"
                 az group list \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --query "[].name" -o tsv
+                  --query "[].name" -o tsv | \
+                  grep -v "$EXCLUDE"
+
+                echo "The following resource groups will be preserved:"
+                echo "$EXCLUDE"
 
           - task: AzureCLI@2
-            displayName: 'Delete all resource groups'
+            displayName: 'Delete resource groups'
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
+                EXCLUDE="$(rsvRG)"
+
                 az group list \
                   --subscription ${{ parameters.subscriptionId }} \
                   --query "[].name" -o tsv | \
+                  grep -v "$EXCLUDE" | \
                   xargs -I {} az group delete \
                     --name {} \
                     --subscription ${{ parameters.subscriptionId }} \
                     --yes
 
-                echo "Teardown initiated for all resource groups in ${{ parameters.environment }}."
-                echo "All RG's have been deleted"
+                echo "Teardown complete. $EXCLUDE preserved."
+
           - task: AzureCLI@2
-            displayName: 'purge keyvaul'
+            displayName: 'Purge Key Vault'
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -99,4 +104,3 @@ stages:
                   --name sandman-kv-${{ parameters.environment }} \
                   --location $(location) \
                   --subscription ${{ parameters.subscriptionId }}
-
