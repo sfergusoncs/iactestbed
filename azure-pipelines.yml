@@ -21,11 +21,6 @@ parameters:
     type: string
     default: ''
 
-  - name: VMpassword  
-    displayName: 'VMPassword'
-    type: string
-    default: ''
-
 pool:
   vmImage: ubuntu-latest
 
