@@ -21,6 +21,7 @@ pool:
 
 variables:
   serviceConnection: 'sandman-sc-${{ parameters.environment }}'
+  hubServiceConnection: 'sandman-sc-hub'
   location: 'southcentralus'
   resourceGroup: 'sandman-rg-${{ parameters.environment }}'
   parametersPath: 'infrastructure/parameters/${{ parameters.environment }}'
@@ -84,7 +85,7 @@ stages:
           - task: AzureCLI@2
             displayName: 'Peer Hub to Spoke'
             inputs:
-              azureSubscription: 'sandman-hub-sc'
+              azureSubscription: $(hubServiceConnection)
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
