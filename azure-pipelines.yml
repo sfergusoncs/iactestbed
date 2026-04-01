@@ -94,6 +94,8 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
+                echo "Remote VNet: /subscriptions/${{ parameters.subscriptionId }}/resourceGroups/sandman-rg-${{ parameters.environment }}/providers/Microsoft.Network/virtualNetworks/sandman-vnet-${{ parameters.environment }}"
+
                 az network vnet peering create \
                   --name sandman-peer-to-${{ parameters.environment }} \
                   --resource-group sandman-rg-hub \
