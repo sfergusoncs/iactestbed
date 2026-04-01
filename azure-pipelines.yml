@@ -16,6 +16,11 @@ parameters:
     type: string
     default: ''
 
+  - name: hubSubscriptionId
+    displayName: 'Hub Subscription ID'
+    type: string
+    default: 'c290fb32-8a22-4aeb-9147-d6d4e54071dd' 
+
 pool:
   vmImage: ubuntu-latest
 
@@ -89,18 +94,11 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                spokeVnetId=$(az network vnet show \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
-                  --name $(vnetName) \
-                  --query 'id' \
-                  --output tsv)
-
                 az network vnet peering create \
                   --name sandman-peer-to-${{ parameters.environment }} \
                   --resource-group sandman-rg-hub \
                   --vnet-name sandman-vnet-hub \
-                  --remote-vnet $spokeVnetId \
+                  --remote-vnet "/subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(resourceGroup)/providers/Microsoft.Network/virtualNetworks/$(vnetName)" \
                   --allow-vnet-access true \
                   --allow-forwarded-traffic true || echo "Peering already exists, skipping"
 
