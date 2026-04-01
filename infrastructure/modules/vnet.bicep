@@ -3,6 +3,7 @@ param addressPrefixes array
 param subnets array
 param enableDdosProtection bool = false
 param environment string
+param hubVnetId string
 
 var tags = {
   app: 'sandman'
@@ -29,6 +30,20 @@ resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
         }
       }
     ]
+  }
+}
+
+// Spoke to Hub peering
+resource spokeToHubPeering 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2023-04-01' = if (hubVnetId != '') {
+  parent: vnet
+  name: 'sandman-peer-to-hub'
+  properties: {
+    remoteVirtualNetwork: {
+      id: hubVnetId
+    }
+    allowVirtualNetworkAccess: true
+    allowForwardedTraffic: true
+    useRemoteGateways: false
   }
 }
 

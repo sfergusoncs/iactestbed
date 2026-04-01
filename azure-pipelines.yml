@@ -20,7 +20,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  serviceConnection: 'sandman-${{ parameters.environment }}-sc'
+  serviceConnection: 'sandman-sc-${{ parameters.environment }}'
   location: 'southcentralus'
   resourceGroup: 'sandman-rg-${{ parameters.environment }}'
   parametersPath: 'infrastructure/parameters/${{ parameters.environment }}'
@@ -45,21 +45,7 @@ stages:
                   --name $(resourceGroup) \
                   --location $(location)
 
-              # Create RSV Resource Group (prod only)
-          - task: AzureCLI@2
-            displayName: 'Create RSV Resource Group'
-            condition: eq('${{ parameters.environment }}', 'prod')
-            inputs:
-              azureSubscription: $(serviceConnection)
-              scriptType: 'bash'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                az group create \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --name sandman-rg-rsv-${{ parameters.environment }} \
-                  --location $(location)
-
-              
+             
           # Create Key Vault
           - task: AzureCLI@2
             displayName: 'Create Keyvault'
@@ -93,6 +79,29 @@ stages:
                   --parameters $(parametersPath)/vnet.params.json \
                   --parameters environment=${{ parameters.environment }} \
                   --parameters location=$(location)
+
+          # Peer Hub to Spoke
+          - task: AzureCLI@2
+            displayName: 'Peer Hub to Spoke'
+            inputs:
+              azureSubscription: 'sandman-hub-sc'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                spokeVnetId=$(az network vnet show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name $(vnetName) \
+                  --query 'id' \
+                  --output tsv)
+
+                az network vnet peering create \
+                  --name sandman-peer-to-${{ parameters.environment }} \
+                  --resource-group sandman-rg-hub \
+                  --vnet-name sandman-vnet-hub \
+                  --remote-vnet $spokeVnetId \
+                  --allow-vnet-access true \
+                  --allow-forwarded-traffic true || echo "Peering already exists, skipping"
 
           # Deploy ACR
           - task: AzureCLI@2
