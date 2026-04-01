@@ -98,7 +98,7 @@ stages:
                   --name sandman-peer-to-${{ parameters.environment }} \
                   --resource-group sandman-rg-hub \
                   --vnet-name sandman-vnet-hub \
-                  --remote-vnet "/subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(resourceGroup)/providers/Microsoft.Network/virtualNetworks/$(vnetName)" \
+                  --remote-vnet "/subscriptions/${{ parameters.subscriptionId }}/resourceGroups/sandman-rg-${{ parameters.environment }}/providers/Microsoft.Network/virtualNetworks/sandman-vnet-${{ parameters.environment }}" \
                   --allow-vnet-access true \
                   --allow-forwarded-traffic true || echo "Peering already exists, skipping"
 
