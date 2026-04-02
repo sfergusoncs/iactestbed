@@ -26,7 +26,8 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  serviceConnection: 'sandman-${{ parameters.environment }}-sc'
+  serviceConnection: 'sandman-sc-${{ parameters.environment }}'
+  hubServiceConnection: 'sandman-sc-hub'
   location: 'southcentralus'
   rsvRG: 'sandman-rg-rsv-${{ parameters.environment }}'
 
@@ -46,6 +47,19 @@ stages:
               fi
               echo "Confirmation matched. Proceeding with teardown of ${{ parameters.environment }} in subscription ${{ parameters.subscriptionId }}."
             displayName: 'Validate Confirmation'
+
+        # Delete Hub to Spoke Peering
+          - task: AzureCLI@2
+            displayName: 'Delete Hub to Spoke Peering'
+            inputs:
+              azureSubscription: $(hubServiceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az network vnet peering delete \
+                  --name sandman-peer-to-${{ parameters.environment }} \
+                  --resource-group sandman-rg-hub \
+                  --vnet-name sandman-vnet-hub || echo "Peering not found, skipping"
 
   # Teardown all resource groups except RSV
   - stage: Teardown
