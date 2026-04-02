@@ -258,7 +258,7 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                existing=$(az redis enterprise show\
+                existing=$(az redisenterprise show\
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
                   --name sandman-redis-${{ parameters.environment }} \
