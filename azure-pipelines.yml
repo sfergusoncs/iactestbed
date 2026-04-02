@@ -156,6 +156,16 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
+                existing=$(az storage account show \
+                --subscription ${{ parameters.subscriptionId }} \
+                --resource-group $(resourceGroup) \
+                --name sandmanblobcache${{ parameters.environment }} \
+                --query 'name' \
+                --output tsv 2>/dev/null)
+
+                if [ -n "$existing" ]; then
+                  echo "blob cache already exists, skipping deployment"
+                else                
                 peSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
@@ -180,6 +190,7 @@ stages:
                   --parameters location=$(location) \
                   --parameters subnetId="$peSubnetId" \
                   --parameters vnetId="$vnetId"
+                fi
 
           # Create RSV Resource Group (prod only)
           - task: AzureCLI@2
@@ -203,6 +214,16 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
+                existing=$(az storage account show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name sandmanblobperm${{ parameters.environment }} \
+                  --query 'name' \
+                  --output tsv 2>/dev/null)
+
+                if [ -n "$existing" ]; then
+                  echo "blob cache already exists, skipping deployment"
+                else               
                 peSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
@@ -227,7 +248,8 @@ stages:
                   --parameters location=$(location) \
                   --parameters subnetId="$peSubnetId" \
                   --parameters vnetId="$vnetId"
-                  
+                  fi
+
               # Deploy REDIS
           - task: AzureCLI@2
             displayName: 'Deploy redis'
@@ -236,6 +258,16 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
+                existing=$(az redis enterprise show\
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name sandman-redis${{ parameters.environment }} \
+                  --query 'name' \
+                  --output tsv 2>/dev/null)
+
+                if [ -n "$existing" ]; then
+                  echo "blob cache already exists, skipping deployment"
+                else               
                 peSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
@@ -260,7 +292,7 @@ stages:
                   --parameters location=$(location) \
                   --parameters subnetId="$peSubnetId" \
                   --parameters vnetId="$vnetId"
-
+                fi
               # Deploy AKS
           - task: AzureCLI@2
             displayName: 'Deploy AKS'
