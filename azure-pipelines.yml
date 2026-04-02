@@ -249,3 +249,36 @@ stages:
                   --parameters location=$(location) \
                   --parameters subnetId="$peSubnetId" \
                   --parameters vnetId="$vnetId"
+
+              # Deploy AKS
+          - task: AzureCLI@2
+            displayName: 'Deploy AKS'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                aksSubnetId=$(az network vnet subnet show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --vnet-name $(vnetName) \
+                  --name sandman-snet-aks \
+                  --query 'id' \
+                  --output tsv)
+
+                acrId=$(az acr show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name sandmanacr${{ parameters.environment }} \
+                  --query 'id' \
+                  --output tsv)
+
+                az deployment group create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --template-file infrastructure/modules/aks.bicep \
+                  --parameters $(parametersPath)/aks.params.json \
+                  --parameters environment=${{ parameters.environment }} \
+                  --parameters location=$(location) \
+                  --parameters aksSubnetId="$aksSubnetId" \
+                  --parameters acrId="$acrId"

@@ -12,15 +12,22 @@
     "userNodeVmSize": { "value": "Standard_D4als_v5" },
     "kubernetesVersion": { "value": "1.31.0" },
     "userNodePools": {
-        "value": [
-            {
-            "name": "userpool",
-            "availabilityZones": [ "2", "3" ],
-            "count": 2,
-            "minCount": 2,
-            "maxCount": 5
-            }
-        ]
+      "value": [
+        {
+          "name": "userpoolz2",
+          "availabilityZones": [ "2" ],
+          "count": 1,
+          "minCount": 1,
+          "maxCount": 3
+        },
+        {
+          "name": "userpoolz3",
+          "availabilityZones": [ "3" ],
+          "count": 1,
+          "minCount": 1,
+          "maxCount": 3
+        }
+      ]
     }
-}
+  }
 }
