@@ -7,7 +7,7 @@
     "systemNodeMaxCount": { "value": 5 },
     "systemNodeVmSize": { "value": "Standard_D4als_v7" },
     "userNodeVmSize": { "value": "Standard_D4als_v7" },
-    "kubernetesVersion": { "value": "1.31.0" },
+    "kubernetesVersion": { "value": "1.34.0" },
     "userNodePools": {
         "value": [
             {
