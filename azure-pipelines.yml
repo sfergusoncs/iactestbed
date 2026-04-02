@@ -112,30 +112,41 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                peSubnetId=$(az network vnet subnet show \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
-                  --vnet-name $(vnetName) \
-                  --name sandman-snet-pe \
-                  --query 'id' \
-                  --output tsv)
+                existing=$(az acr show \
+                --subscription ${{ parameters.subscriptionId }} \
+                --resource-group $(resourceGroup) \
+                --name sandmanacr${{ parameters.environment }} \
+                --query 'name' \
+                --output tsv 2>/dev/null)
 
-                vnetId=$(az network vnet show \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
-                  --name $(vnetName) \
-                  --query 'id' \
-                  --output tsv)
+                if [ -n "$existing" ]; then
+                  echo "ACR already exists, skipping deployment"
+                else  
+                  peSubnetId=$(az network vnet subnet show \
+                    --subscription ${{ parameters.subscriptionId }} \
+                    --resource-group $(resourceGroup) \
+                    --vnet-name $(vnetName) \
+                    --name sandman-snet-pe \
+                    --query 'id' \
+                    --output tsv)
 
-                az deployment group create \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
-                  --template-file infrastructure/modules/acr.bicep \
-                  --parameters $(parametersPath)/acr.params.json \
-                  --parameters environment=${{ parameters.environment }} \
-                  --parameters location=$(location) \
-                  --parameters subnetId="$peSubnetId" \
-                  --parameters vnetId="$vnetId"
+                  vnetId=$(az network vnet show \
+                    --subscription ${{ parameters.subscriptionId }} \
+                    --resource-group $(resourceGroup) \
+                    --name $(vnetName) \
+                    --query 'id' \
+                    --output tsv)
+
+                  az deployment group create \
+                    --subscription ${{ parameters.subscriptionId }} \
+                    --resource-group $(resourceGroup) \
+                    --template-file infrastructure/modules/acr.bicep \
+                    --parameters $(parametersPath)/acr.params.json \
+                    --parameters environment=${{ parameters.environment }} \
+                    --parameters location=$(location) \
+                    --parameters subnetId="$peSubnetId" \
+                    --parameters vnetId="$vnetId"
+                fi
 
           # Deploy Blob Cache Storage
           - task: AzureCLI@2
