@@ -106,7 +106,7 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2025-10-02-previ
           vnetSubnetID: aksSubnetId
           maxPods: 110
           type: 'VirtualMachineScaleSets'
-          availabilityZones: [ '2', '3' ]
+          availabilityZones: [ '1', '2' ]
           scaleDownMode: 'Delete'
           enableNodePublicIP: false
           nodeTaints: [ 'CriticalAddonsOnly=true:NoSchedule' ]

@@ -10,6 +10,30 @@ parameters:
       - uat
       - prod
       - sandbox
+  - name: deployVnet
+    displayName: 'Deploy VNet'
+    type: boolean
+    default: true
+  - name: deployACR
+    displayName: 'Deploy ACR'
+    type: boolean
+    default: true
+  - name: deployRedis
+    displayName: 'Deploy Redis'
+    type: boolean
+    default: true
+  - name: deployAKS
+    displayName: 'Deploy AKS'
+    type: boolean
+    default: true
+  - name: deployBlobCache
+    displayName: 'Deploy Blob Cache'
+    type: boolean
+    default: true
+  - name: deployBlobPerm
+    displayName: 'Deploy Blob Perm'
+    type: boolean
+    default: true
 
   - name: subscriptionId
     displayName: 'Target Subscription ID'
@@ -73,6 +97,7 @@ stages:
           # Deploy VNet
           - task: AzureCLI@2
             displayName: 'Deploy VNet'
+            condition: and(succeeded(), eq('${{ parameters.deployVnet }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -107,6 +132,7 @@ stages:
           # Deploy ACR
           - task: AzureCLI@2
             displayName: 'Deploy ACR'
+            condition: and(succeeded(), eq('${{ parameters.deployACR }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -151,6 +177,7 @@ stages:
           # Deploy Blob Cache Storage
           - task: AzureCLI@2
             displayName: 'Deploy Blob Cache Storage'
+            condition: and(succeeded(), eq('${{ parameters.deployBlobCache }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -209,6 +236,7 @@ stages:
           # Deploy Blob Perm Storage
           - task: AzureCLI@2
             displayName: 'Deploy Blob Perm Storage'
+            condition: and(succeeded(), eq('${{ parameters.deployBlobPerm }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -253,6 +281,7 @@ stages:
               # Deploy REDIS
           - task: AzureCLI@2
             displayName: 'Deploy redis'
+            condition: and(succeeded(), eq('${{ parameters.deployRedis }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -296,6 +325,7 @@ stages:
               # Deploy AKS
           - task: AzureCLI@2
             displayName: 'Deploy AKS'
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
