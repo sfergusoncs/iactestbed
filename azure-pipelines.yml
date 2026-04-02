@@ -216,3 +216,36 @@ stages:
                   --parameters location=$(location) \
                   --parameters subnetId="$peSubnetId" \
                   --parameters vnetId="$vnetId"
+                  
+              # Deploy REDIS
+          - task: AzureCLI@2
+            displayName: 'Deploy redis'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                peSubnetId=$(az network vnet subnet show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --vnet-name $(vnetName) \
+                  --name sandman-snet-pe \
+                  --query 'id' \
+                  --output tsv)
+
+                vnetId=$(az network vnet show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name $(vnetName) \
+                  --query 'id' \
+                  --output tsv)
+
+                az deployment group create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --template-file infrastructure/modules/redis.bicep \
+                  --parameters $(parametersPath)/redis.params.json \
+                  --parameters environment=${{ parameters.environment }} \
+                  --parameters location=$(location) \
+                  --parameters subnetId="$peSubnetId" \
+                  --parameters vnetId="$vnetId"
