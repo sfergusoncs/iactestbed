@@ -217,12 +217,12 @@ stages:
                 existing=$(az storage account show \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
-                  --name sandmanblobperm${{ parameters.environment }} \
+                  --name sandmanperm${{ parameters.environment }} \
                   --query 'name' \
                   --output tsv 2>/dev/null)
 
                 if [ -n "$existing" ]; then
-                  echo "blob cache already exists, skipping deployment"
+                  echo "blob perm already exists, skipping deployment"
                 else               
                 peSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
@@ -261,12 +261,12 @@ stages:
                 existing=$(az redis enterprise show\
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
-                  --name sandman-redis${{ parameters.environment }} \
+                  --name sandman-redis-${{ parameters.environment }} \
                   --query 'name' \
                   --output tsv 2>/dev/null)
 
                 if [ -n "$existing" ]; then
-                  echo "blob cache already exists, skipping deployment"
+                  echo "redis already exists, skipping deployment"
                 else               
                 peSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
