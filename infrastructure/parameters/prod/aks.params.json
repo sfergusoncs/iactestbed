@@ -15,14 +15,14 @@
       "value": [
         {
           "name": "userpoolz2",
-          "availabilityZones": [ "2" ],
+          "availabilityZones": [ "1" ],
           "count": 1,
           "minCount": 1,
           "maxCount": 3
         },
         {
           "name": "userpoolz3",
-          "availabilityZones": [ "3" ],
+          "availabilityZones": [ "2" ],
           "count": 1,
           "minCount": 1,
           "maxCount": 3

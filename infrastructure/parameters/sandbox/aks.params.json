@@ -12,7 +12,7 @@
         "value": [
             {
             "name": "userpool",
-            "availabilityZones": [ "2", "3" ],
+            "availabilityZones": [ "1", "2" ],
             "count": 2,
             "minCount": 2,
             "maxCount": 5
