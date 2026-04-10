@@ -3,7 +3,6 @@ param location string = resourceGroup().location
 param aksSubnetId string
 param acrId string
 param podCidr string
-param vnetId string
 
 // System node pool sizing
 param systemNodeCount int

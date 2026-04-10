@@ -366,7 +366,6 @@ stages:
                   --parameters location=$(location) \
                   --parameters aksSubnetId="$aksSubnetId" \
                   --parameters acrId="$acrId" \
-                  --parameters vnetId="$vnetId"
 
               # Assign Network Contributor to AKS UAMI
           - task: AzureCLI@2
