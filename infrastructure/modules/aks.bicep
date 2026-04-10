@@ -2,6 +2,8 @@ param environment string
 param location string = resourceGroup().location
 param aksSubnetId string
 param acrId string
+param podCidr string
+param vnetId string
 
 // System node pool sizing
 param systemNodeCount int
@@ -155,9 +157,11 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2025-10-02-previ
 
     networkProfile: {
       networkPlugin: 'azure'
-      networkPolicy: 'azure'
-      networkDataplane: 'azure'
+      networkPluginMode: 'overlay'
+      networkPolicy: 'cilium'
+      networkDataplane: 'cilium'
       loadBalancerSku: 'standard'
+      podCidr: podCidr
       serviceCidr: serviceCidr
       dnsServiceIP: dnsServiceIP
       outboundType: 'loadBalancer'
