@@ -2,7 +2,6 @@ param environment string
 param location string = resourceGroup().location
 param aksSubnetId string
 param acrId string
-param podCidr string
 
 // System node pool sizing
 param systemNodeCount int
@@ -105,7 +104,7 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2025-10-02-previ
           osType: 'Linux'
           osSKU: 'Ubuntu'
           vnetSubnetID: aksSubnetId
-          maxPods: 40
+          maxPods: 110
           type: 'VirtualMachineScaleSets'
           availabilityZones: [ '1', '2' ]
           scaleDownMode: 'Delete'
@@ -136,14 +135,14 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2025-10-02-previ
         osType: 'Linux'
         osSKU: 'Ubuntu'
         vnetSubnetID: aksSubnetId
-        maxPods: 40
+        maxPods: 110
         type: 'VirtualMachineScaleSets'
         availabilityZones: pool.availabilityZones
         scaleDownMode: 'Delete'
         enableNodePublicIP: false
         upgradeStrategy: 'Rolling'
         upgradeSettings: {
-          maxSurge: '1'
+          maxSurge: '10%'
           maxUnavailable: '0'
         }
         securityProfile: {
@@ -156,11 +155,9 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2025-10-02-previ
 
     networkProfile: {
       networkPlugin: 'azure'
-      networkPluginMode: 'overlay'
-      networkPolicy: 'cilium'
-      networkDataplane: 'cilium'
+      networkPolicy: 'azure'
+      networkDataplane: 'azure'
       loadBalancerSku: 'standard'
-      podCidr: podCidr
       serviceCidr: serviceCidr
       dnsServiceIP: dnsServiceIP
       outboundType: 'loadBalancer'
