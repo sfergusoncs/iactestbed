@@ -10,30 +10,32 @@ parameters:
       - uat
       - prod
       - sandbox
+
+    
   - name: deployVnet
     displayName: 'Deploy VNet'
     type: boolean
-    default: true
+    default: 'true'
   - name: deployACR
     displayName: 'Deploy ACR'
     type: boolean
-    default: true
+    default: 'true'
   - name: deployRedis
     displayName: 'Deploy Redis'
     type: boolean
-    default: true
+    default: 'true'
   - name: deployAKS
     displayName: 'Deploy AKS'
     type: boolean
-    default: true
+    default: 'true'
   - name: deployBlobCache
     displayName: 'Deploy Blob Cache'
     type: boolean
-    default: true
+    default: 'true'
   - name: deployBlobPerm
     displayName: 'Deploy Blob Perm'
     type: boolean
-    default: true
+    default: 'true'
 
   - name: subscriptionId
     displayName: 'Target Subscription ID'
@@ -74,6 +76,8 @@ stages:
                   --subscription ${{ parameters.subscriptionId }} \
                   --name $(resourceGroup) \
                   --location $(location)
+
+          
 
              
           # Create Key Vault
@@ -339,6 +343,13 @@ stages:
                   --query 'id' \
                   --output tsv)
 
+                vnetId=$(az network vnet show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name $(vnetName) \
+                  --query 'id' \
+                  --output tsv)
+
                 acrId=$(az acr show \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
@@ -355,3 +366,46 @@ stages:
                   --parameters location=$(location) \
                   --parameters aksSubnetId="$aksSubnetId" \
                   --parameters acrId="$acrId"
+                  --parameters vnetId="$vnetId"
+
+              # Assign Network Contributor to AKS UAMI
+          - task: AzureCLI@2
+            displayName: 'Assign Network Contributor to AKS UAMI'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                uamiPrincipalId=$(az identity show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name sandman-uami-aks-${{ parameters.environment }} \
+                  --query 'principalId' \
+                  --output tsv)
+
+                vnetId=$(az network vnet show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name $(vnetName) \
+                  --query 'id' \
+                  --output tsv)
+
+                az role assignment create \
+                  --assignee $uamiPrincipalId \
+                  --role 'Network Contributor' \
+                  --scope $vnetId \
+                  --subscription ${{ parameters.subscriptionId }} || echo "Role assignment already exists, skipping"
+
+              # Attach ACR to AKS
+          - task: AzureCLI@2
+            displayName: 'Attach ACR to AKS'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az aks update \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name sandman-aks-${{ parameters.environment }} \
+                  --attach-acr sandmanacr${{ parameters.environment }}
