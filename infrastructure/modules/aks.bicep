@@ -136,7 +136,7 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2025-10-02-previ
         osType: 'Linux'
         osSKU: 'Ubuntu'
         vnetSubnetID: aksSubnetId
-        maxPods: 110
+        maxPods: 50
         type: 'VirtualMachineScaleSets'
         availabilityZones: pool.availabilityZones
         scaleDownMode: 'Delete'
