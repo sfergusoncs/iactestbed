@@ -143,7 +143,7 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2025-10-02-previ
         enableNodePublicIP: false
         upgradeStrategy: 'Rolling'
         upgradeSettings: {
-          maxSurge: '10%'
+          maxSurge: '1'
           maxUnavailable: '0'
         }
         securityProfile: {
