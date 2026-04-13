@@ -98,6 +98,22 @@ stages:
                   --tags app=sandman \
                   --retention-days 7 || echo "keyvault already exists, skipping"
 
+              #Create Routetable    
+          - task: AzureCLI@2
+            displayName: 'Deploy Route Table'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az deployment group create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --template-file infrastructure/modules/routetable.bicep \
+                  --parameters $(parametersPath)/routetable.params.json \
+                  --parameters routeTableName=sandman-rt-${{ parameters.environment }} \
+                  --parameters tags="{'app':'sandman','environment':'${{ parameters.environment }}'}"
+
           # Deploy VNet
           - task: AzureCLI@2
             displayName: 'Deploy VNet'

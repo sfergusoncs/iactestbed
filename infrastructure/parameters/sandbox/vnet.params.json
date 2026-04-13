@@ -13,7 +13,8 @@
             "addressPrefix": "10.14.0.0/22",
             "delegations": [],
             "privateEndpointNetworkPolicies": "Disabled",
-            "privateLinkServiceNetworkPolicies": "Enabled"
+            "privateLinkServiceNetworkPolicies": "Enabled",
+            "applyRouteTable": true
           }
         },    
         {
@@ -22,7 +23,8 @@
             "addressPrefix": "10.14.4.0/24",
             "delegations": [],
             "privateEndpointNetworkPolicies": "Disabled",
-            "privateLinkServiceNetworkPolicies": "Enabled"
+            "privateLinkServiceNetworkPolicies": "Enabled",
+            "applyRouteTable": true
           }
         }    
       ]

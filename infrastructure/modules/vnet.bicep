@@ -5,6 +5,8 @@ param enableDdosProtection bool = false
 param environment string
 param hubVnetId string
 
+var routeTableId = resourceId('Microsoft.Network/routeTables', 'sandman-rt-${environment}')
+
 var tags = {
   app: 'sandman'
   env: environment
@@ -27,6 +29,9 @@ resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
           delegations: s.properties.delegations
           privateEndpointNetworkPolicies: s.properties.privateEndpointNetworkPolicies
           privateLinkServiceNetworkPolicies: s.properties.privateLinkServiceNetworkPolicies
+          routeTable: s.properties.?applyRouteTable == true ? {
+            id: routeTableId
+          } : null
         }
       }
     ]

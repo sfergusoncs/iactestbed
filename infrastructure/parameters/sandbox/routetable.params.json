@@ -1,0 +1,190 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "routes": {
+      "value": [
+        {
+          "name": "route-to-onprem-vpn",
+          "addressPrefix": "172.16.30.0/23",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "Internet",
+          "addressPrefix": "0.0.0.0/0",
+          "nextHopType": "Internet",
+          "nextHopIpAddress": ""
+        },
+        {
+          "name": "Meraki-GlenRose",
+          "addressPrefix": "172.16.1.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "Meraki-Nixon",
+          "addressPrefix": "172.16.14.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "Meraki-STX",
+          "addressPrefix": "192.168.0.0/23",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "Meraki-Venus",
+          "addressPrefix": "192.168.168.0/22",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "Meraki-ZT",
+          "addressPrefix": "172.16.24.0/23",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "Meraki-ClientVPN",
+          "addressPrefix": "172.16.16.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "AnyConnectVPNClient",
+          "addressPrefix": "172.16.216.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "Meraki-RiverRun",
+          "addressPrefix": "172.16.30.0/23",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "AnyConnectVPN",
+          "addressPrefix": "172.16.218.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "AnyConnectVPNHQ",
+          "addressPrefix": "172.16.116.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "TreeDog",
+          "addressPrefix": "192.168.135.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "Meraki-HangingH",
+          "addressPrefix": "172.16.34.0/23",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "OF07",
+          "addressPrefix": "192.168.132.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "Meraki-TripleT",
+          "addressPrefix": "172.16.44.0/23",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "OF02",
+          "addressPrefix": "192.168.130.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "OF09",
+          "addressPrefix": "192.168.136.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "OF01",
+          "addressPrefix": "192.168.128.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "OF03",
+          "addressPrefix": "192.168.131.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "OF04",
+          "addressPrefix": "192.168.133.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "OF05",
+          "addressPrefix": "192.168.139.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "OF06",
+          "addressPrefix": "172.16.4.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "OF08",
+          "addressPrefix": "192.168.134.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "OF10",
+          "addressPrefix": "192.168.137.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "OF11",
+          "addressPrefix": "192.168.138.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "Azure-NorthCentral",
+          "addressPrefix": "10.2.0.0/18",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "SecureConnectSubnetDFW",
+          "addressPrefix": "192.168.165.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "AnyConnectNorthAZ",
+          "addressPrefix": "172.16.217.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        },
+        {
+          "name": "VPNClientsHangingH",
+          "addressPrefix": "172.16.122.0/24",
+          "nextHopType": "VirtualAppliance",
+          "nextHopIpAddress": "10.0.70.4"
+        }
+      ]
+    }
+  }
+}
