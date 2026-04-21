@@ -65,6 +65,16 @@ stages:
     jobs:
       - job: DeployInfrastructure
         steps:
+          - task: AzureCLI@2
+            displayName: 'Configure Git Bash Environment'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                echo "MSYS_NO_PATHCONV=1" >> $BASH_ENV
+                echo "MSYS2_ARG_CONV_EXCL=*" >> $BASH_ENV
+                
           # Create Resource Group
           - task: AzureCLI@2
             displayName: 'Create Resource Group'
