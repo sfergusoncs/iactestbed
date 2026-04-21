@@ -24,6 +24,7 @@ parameters:
 
 pool:
   vmImage: ubuntu-latest
+  name: default
 
 variables:
   serviceConnection: 'sandman-sc-${{ parameters.environment }}'
