@@ -5,12 +5,6 @@
     "routes": {
       "value": [
         {
-          "name": "route-to-onprem-vpn",
-          "addressPrefix": "172.16.30.0/23",
-          "nextHopType": "VirtualAppliance",
-          "nextHopIpAddress": "10.0.70.4"
-        },
-        {
           "name": "Internet",
           "addressPrefix": "0.0.0.0/0",
           "nextHopType": "Internet",
