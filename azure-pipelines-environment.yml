@@ -385,7 +385,7 @@ stages:
                   --parameters environment=${{ parameters.environment }} \
                   --parameters location=$(location) \
                   --parameters aksSubnetId="$aksSubnetId" \
-                  --parameters acrId="$acrId" \
+                  --parameters acrId="$acrId"
 
               # Assign Network Contributor to AKS UAMI
           - task: AzureCLI@2
