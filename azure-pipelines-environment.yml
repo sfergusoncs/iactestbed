@@ -8,6 +8,7 @@ parameters:
     values:
       - dev
       - uat
+      - staging
       - prod
       - sandbox
 
@@ -311,7 +312,7 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                existing=$(az redisenterprise show\
+                existing=$(az redisenterprise show \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
                   --name sandman-redis-${{ parameters.environment }} \
@@ -390,6 +391,7 @@ stages:
               # Assign Network Contributor to AKS UAMI
           - task: AzureCLI@2
             displayName: 'Assign Network Contributor to AKS UAMI'
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -418,6 +420,7 @@ stages:
               # Attach ACR to AKS
           - task: AzureCLI@2
             displayName: 'Attach ACR to AKS'
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
