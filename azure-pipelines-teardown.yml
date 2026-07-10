@@ -41,7 +41,7 @@ stages:
       - job: ConfirmDestruction
         displayName: 'Check confirmation matches environment'
         steps:
-          - script: |
+          - bash: |
               if [ "${{ parameters.confirm }}" != "${{ parameters.environment }}" ]; then
                 echo "##[error] Confirmation '${{ parameters.confirm }}' does not match environment '${{ parameters.environment }}'. Aborting."
                 exit 1
