@@ -162,6 +162,9 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2025-10-02-previ
       dnsServiceIP: dnsServiceIP
       outboundType: 'loadBalancer'
       ipFamilies: [ 'IPv4' ]
+      gatewayProfile: {
+        enabled: true
+      }
     }
 
     aadProfile: {
