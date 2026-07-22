@@ -23,13 +23,13 @@ parameters:
     default: ''
 
 pool:
-  vmImage: ubuntu-latest
   name: default
 
 variables:
   serviceConnection: 'sandman-sc-${{ parameters.environment }}'
   hubServiceConnection: 'sandman-sc-hub'
   location: 'southcentralus'
+  resourceGroup: 'sandman-rg-${{ parameters.environment }}'
   rsvRG: 'sandman-rg-rsv-${{ parameters.environment }}'
 
 stages:
@@ -49,6 +49,16 @@ stages:
               echo "Confirmation matched. Proceeding with teardown of ${{ parameters.environment }} in subscription ${{ parameters.subscriptionId }}."
             displayName: 'Validate Confirmation'
 
+        
+
+  # Teardown all resource groups except RSV
+  - stage: Teardown
+    displayName: 'Teardown ${{ parameters.environment }}'
+    dependsOn: Validate
+    jobs:
+      - job: DeleteResourceGroups
+        displayName: 'Delete resource groups'
+        steps:
         # Delete Hub to Spoke Peering
           - task: AzureCLI@2
             displayName: 'Delete Hub to Spoke Peering'
@@ -62,14 +72,26 @@ stages:
                   --resource-group sandman-rg-hub \
                   --vnet-name sandman-vnet-hub || echo "Peering not found, skipping"
 
-  # Teardown all resource groups except RSV
-  - stage: Teardown
-    displayName: 'Teardown ${{ parameters.environment }}'
-    dependsOn: Validate
-    jobs:
-      - job: DeleteResourceGroups
-        displayName: 'Delete resource groups'
-        steps:
+        #remove peerings
+          - task: AzureCLI@2
+            displayName: 'Remove VNet Peerings'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                # Get all peerings in the VNet and delete them
+                az network vnet peering list \
+                  --resource-group $(resourceGroup) \
+                  --vnet-name sandman-vnet-${{ parameters.environment }} \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --query "[].name" -o tsv | \
+                  xargs -I {} az network vnet peering delete \
+                    --name {} \
+                    --resource-group $(resourceGroup) \
+                    --vnet-name sandman-vnet-${{ parameters.environment }} \
+                    --subscription ${{ parameters.subscriptionId }}
+
           - task: AzureCLI@2
             displayName: 'List resource groups to be deleted'
             inputs:
@@ -119,3 +141,16 @@ stages:
                   --name sandman-kv-${{ parameters.environment }} \
                   --location $(location) \
                   --subscription ${{ parameters.subscriptionId }}
+
+          - task: AzureCLI@2
+            displayName: 'Remind to remove OG Prod peering manually'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                echo "##[warning] MANUAL ACTION REQUIRED:"
+                echo "##[warning] Remove the VNet peering from OG Prod VNet to sandman-vnet-${{ parameters.environment }}"
+                echo "##[warning] Resource Group: rg-cmstx-prod-southcentralus-001"
+                echo "##[warning] VNet: <og-prod-vnet-name>"
+                echo "##[warning] Peering name: sandman-peer-to-${{ parameters.environment }}"

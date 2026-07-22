@@ -431,3 +431,19 @@ stages:
                   --resource-group $(resourceGroup) \
                   --name sandman-aks-${{ parameters.environment }} \
                   --attach-acr sandmanacr${{ parameters.environment }}
+
+          - task: AzureCLI@2
+            displayName: 'Assign AKS Admin Role to CSOL_Server_admin'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                GROUP_ID=$(az ad group show --group "CSOL_Server_admin" --query id -o tsv)
+                
+                az role assignment create \
+                  --role "Azure Kubernetes Service RBAC Cluster Admin" \
+                  --assignee-object-id $GROUP_ID \
+                  --assignee-principal-type Group \
+                  --scope /subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(resourceGroup)/providers/Microsoft.ContainerService/managedClusters/sandman-aks-${{ parameters.environment }}
+                  
