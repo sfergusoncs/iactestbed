@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sandman-frontend
+  namespace: sandman
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sandman-frontend
+  template:
+    metadata:
+      labels:
+        app: sandman-frontend
+    spec:
+      containers:
+        - name: sandman-frontend
+          image: sandmanacrsandbox.azurecr.io/frontend/sandman-frontend:sandbox
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80

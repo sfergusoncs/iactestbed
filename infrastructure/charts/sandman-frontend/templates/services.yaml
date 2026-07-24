@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sandman-frontend-svc
+  namespace: sandman
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  selector:
+    app: sandman-frontend
+  ports:
+    - port: 30440
+      targetPort: 80
+  type: LoadBalancer
