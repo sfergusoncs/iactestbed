@@ -2,5 +2,4 @@ name: sandman-frontend-dev
 replicaCount: 1
 
 image:
-  repository: sandmanacrdev.azurecr.io/cmstx-frontend
   tag: dev

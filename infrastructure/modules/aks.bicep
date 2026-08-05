@@ -1,7 +1,6 @@
 param environment string
 param location string = resourceGroup().location
 param aksSubnetId string
-param acrId string
 
 // System node pool sizing
 param systemNodeCount int
@@ -50,16 +49,9 @@ resource aksUami 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' =
   tags: tags
 }
 
-// ACR Pull Role Assignment
-resource acrPullRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(acrId, aksUami.id, 'acrpull')
-  scope: resourceGroup()
-  properties: {
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d')
-    principalId: aksUami.properties.principalId
-    principalType: 'ServicePrincipal'
-  }
-}
+// AcrPull for the AKS kubelet identity is granted against the hub ACR from the
+// pipeline (cross-subscription), not here - see the "Grant AcrPull to Kubelet
+// Identity" step in azure-pipelines-environment.yml.
 
 // AKS Cluster
 resource aksCluster 'Microsoft.ContainerService/managedClusters@2025-10-02-preview' = {

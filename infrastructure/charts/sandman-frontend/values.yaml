@@ -3,6 +3,7 @@ namespace: sandman
 replicaCount: 1
 
 image:
+  repository: sandmanacrhub-brgyhrbngfbdfhba.azurecr.io/cmstx-frontend
   pullPolicy: Always
 
 nodeSelector:

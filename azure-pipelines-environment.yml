@@ -58,6 +58,9 @@ variables:
   resourceGroup: 'sandman-rg-${{ parameters.environment }}'
   parametersPath: 'infrastructure/parameters/${{ parameters.environment }}'
   vnetName: 'sandman-vnet-${{ parameters.environment }}'
+  hubAcrLoginServer: 'sandmanacrhub-brgyhrbngfbdfhba.azurecr.io'
+  hubAfdProfileName: 'Sandman-AFD'
+  hubAfdEndpointName: 'sandman-afdep'
   MSYS_NO_PATHCONV: 1
   MSYS2_ARG_CONV_EXCL: '*'
 
@@ -153,50 +156,26 @@ stages:
                   --allow-vnet-access true \
                   --allow-forwarded-traffic true || echo "Peering already exists, skipping"
 
-          # Deploy ACR
+          # Link spoke VNet to the hub ACR's private DNS zone
+          # (ACR itself lives only in the hub subscription - see hub resources
+          # in CLAUDE.md. This just gives the spoke's pods DNS resolution to it.)
           - task: AzureCLI@2
-            displayName: 'Deploy ACR'
+            displayName: 'Link ACR DNS Zone (hub)'
             condition: and(succeeded(), eq('${{ parameters.deployACR }}', 'True'))
             inputs:
-              azureSubscription: $(serviceConnection)
+              azureSubscription: $(hubServiceConnection)
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                existing=$(az acr show \
-                --subscription ${{ parameters.subscriptionId }} \
-                --resource-group $(resourceGroup) \
-                --name sandmanacr${{ parameters.environment }} \
-                --query 'name' \
-                --output tsv 2>/dev/null)
+                vnetId="/subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(resourceGroup)/providers/Microsoft.Network/virtualNetworks/$(vnetName)"
 
-                if [ -n "$existing" ]; then
-                  echo "ACR already exists, skipping deployment"
-                else
-                  peSubnetId=$(az network vnet subnet show \
-                    --subscription ${{ parameters.subscriptionId }} \
-                    --resource-group $(resourceGroup) \
-                    --vnet-name $(vnetName) \
-                    --name sandman-snet-pe \
-                    --query 'id' \
-                    --output tsv)
-
-                  vnetId=$(az network vnet show \
-                    --subscription ${{ parameters.subscriptionId }} \
-                    --resource-group $(resourceGroup) \
-                    --name $(vnetName) \
-                    --query 'id' \
-                    --output tsv)
-
-                  az deployment group create \
-                    --subscription ${{ parameters.subscriptionId }} \
-                    --resource-group $(resourceGroup) \
-                    --template-file infrastructure/modules/acr.bicep \
-                    --parameters $(parametersPath)/acr.params.json \
-                    --parameters environment=${{ parameters.environment }} \
-                    --parameters location=$(location) \
-                    --parameters subnetId="$peSubnetId" \
-                    --parameters vnetId="$vnetId"
-                fi
+                az deployment group create \
+                  --subscription ${{ parameters.hubSubscriptionId }} \
+                  --resource-group sandman-rg-hub \
+                  --template-file infrastructure/modules/acr.bicep \
+                  --parameters $(parametersPath)/acr.params.json \
+                  --parameters environment=${{ parameters.environment }} \
+                  --parameters vnetId="$vnetId"
 
           # Deploy Blob Cache Storage
           - task: AzureCLI@2
@@ -370,18 +349,6 @@ stages:
                   --query 'id' \
                   --output tsv)
 
-                acrId=$(az acr show \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
-                  --name sandmanacr${{ parameters.environment }} \
-                  --query 'id' \
-                  --output tsv 2>/dev/null)
-
-                if [ -z "$acrId" ]; then
-                  echo "##vso[task.logissue type=error]ACR 'sandmanacr${{ parameters.environment }}' not found. Run the pipeline with deployACR=true first."
-                  exit 1
-                fi
-
                 az deployment group create \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
@@ -389,8 +356,7 @@ stages:
                   --parameters $(parametersPath)/aks.params.json \
                   --parameters environment=${{ parameters.environment }} \
                   --parameters location=$(location) \
-                  --parameters aksSubnetId="$aksSubnetId" \
-                  --parameters acrId="$acrId"
+                  --parameters aksSubnetId="$aksSubnetId"
 
               # Assign Network Contributor to AKS UAMI
           - task: AzureCLI@2
@@ -422,21 +388,6 @@ stages:
                   --scope $vnetId \
                   --subscription ${{ parameters.subscriptionId }} || echo "Role assignment already exists, skipping"
 
-              # Attach ACR to AKS
-          - task: AzureCLI@2
-            displayName: 'Attach ACR to AKS'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
-            inputs:
-              azureSubscription: $(serviceConnection)
-              scriptType: 'bash'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                az aks update \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
-                  --name sandman-aks-${{ parameters.environment }} \
-                  --attach-acr sandmanacr${{ parameters.environment }}
-
           - task: AzureCLI@2
             displayName: 'Assign AKS Admin Role to CSOL_Server_admin'
             inputs:
@@ -452,33 +403,6 @@ stages:
                   --assignee-principal-type Group \
                   --scope /subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(resourceGroup)/providers/Microsoft.ContainerService/managedClusters/sandman-aks-${{ parameters.environment }} \
                   || echo "Role assignment already exists, skipping"
-
-           # Assign AcrPush to service connection SP
-          - task: AzureCLI@2
-            displayName: 'Assign AcrPush to Service Connection SP'
-            condition: and(succeeded(), eq('${{ parameters.deployACR }}', 'True'))
-            inputs:
-              azureSubscription: $(serviceConnection)
-              scriptType: 'bash'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                SP_OBJECT_ID=$(az ad sp show \
-                  --id $(az account show --query user.name -o tsv) \
-                  --query id -o tsv)
-
-                ACR_ID=$(az acr show \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
-                  --name sandmanacr${{ parameters.environment }} \
-                  --query 'id' \
-                  --output tsv)
-
-                az role assignment create \
-                  --role "AcrPush" \
-                  --assignee-object-id $SP_OBJECT_ID \
-                  --assignee-principal-type ServicePrincipal \
-                  --scope $ACR_ID \
-                  --subscription ${{ parameters.subscriptionId }} || echo "Role assignment already exists, skipping"
 
           # Assign AKS RBAC Cluster Admin to service connection SP
           - task: AzureCLI@2
@@ -526,6 +450,28 @@ stages:
                 echo "##vso[task.setvariable variable=kubeletClientId;isOutput=true]$kubeletClientId"
                 echo "##vso[task.setvariable variable=kubeletPrincipalId;isOutput=true]$kubeletPrincipalId"
             name: getKubeletIdentity
+
+          # Grant AcrPull to Kubelet Identity (cross-subscription - ACR lives in hub)
+          - task: AzureCLI@2
+            displayName: 'Grant AcrPull to Kubelet Identity'
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            inputs:
+              azureSubscription: $(hubServiceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                acrId=$(az acr list \
+                  --subscription ${{ parameters.hubSubscriptionId }} \
+                  --resource-group sandman-rg-hub \
+                  --query "[?loginServer=='$(hubAcrLoginServer)'].id" \
+                  --output tsv)
+
+                az role assignment create \
+                  --assignee-object-id $(getKubeletIdentity.kubeletPrincipalId) \
+                  --assignee-principal-type ServicePrincipal \
+                  --role "AcrPull" \
+                  --scope $acrId \
+                  || echo "Role assignment already exists, skipping"
 
           # Grant App Config Data Reader to Kubelet Identity (cross-subscription)
           - task: AzureCLI@2
@@ -681,7 +627,15 @@ stages:
                   --query 'id' \
                   --output tsv)
 
+                plsAlias=$(az network private-link-service show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name sandman-pls-frontend-${{ parameters.environment }} \
+                  --query 'alias' \
+                  --output tsv)
+
                 echo "##vso[task.setvariable variable=plsId;isOutput=true]$plsId"
+                echo "##vso[task.setvariable variable=plsAlias;isOutput=true]$plsAlias"
             name: createPls
 
           # Configure Front Door Origin
@@ -697,8 +651,8 @@ stages:
                 az afd origin-group create \
                   --subscription ${{ parameters.hubSubscriptionId }} \
                   --resource-group sandman-rg-hub \
-                  --profile-name sandman-afd-hub \
-                  --origin-group-name sandman-frontend-${{ parameters.environment }} \
+                  --profile-name $(hubAfdProfileName) \
+                  --origin-group-name sandman-${{ parameters.environment }} \
                   --probe-request-type GET \
                   --probe-protocol Http \
                   --probe-interval-in-seconds 30 \
@@ -710,10 +664,10 @@ stages:
                 az afd origin create \
                   --subscription ${{ parameters.hubSubscriptionId }} \
                   --resource-group sandman-rg-hub \
-                  --profile-name sandman-afd-hub \
-                  --origin-group-name sandman-frontend-${{ parameters.environment }} \
-                  --origin-name sandman-frontend-${{ parameters.environment }} \
-                  --host-name sandman-${{ parameters.environment }}.chalksolutions.com \
+                  --profile-name $(hubAfdProfileName) \
+                  --origin-group-name sandman-${{ parameters.environment }} \
+                  --origin-name sandman-${{ parameters.environment }} \
+                  --host-name $(createPls.plsAlias) \
                   --origin-host-header sandman-${{ parameters.environment }}.chalksolutions.com \
                   --http-port 30440 \
                   --https-port 443 \
@@ -743,6 +697,57 @@ stages:
                     --connection-status Approved
                 fi
 
+          # Create Front Door Route
+          # Reuses the existing shared endpoint ($(hubAfdEndpointName)); attaches the
+          # environment's custom domain if it's already been provisioned/validated
+          # (that provisioning itself stays manual - it needs chalksolutions.com DNS
+          # access this pipeline doesn't have), otherwise falls back to the default
+          # AFD hostname so the route still works.
+          - task: AzureCLI@2
+            displayName: 'Create Front Door Route'
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            inputs:
+              azureSubscription: $(hubServiceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                customDomainId=$(az afd custom-domain list \
+                  --subscription ${{ parameters.hubSubscriptionId }} \
+                  --resource-group sandman-rg-hub \
+                  --profile-name $(hubAfdProfileName) \
+                  --query "[?hostName=='sandman-${{ parameters.environment }}.chalksolutions.com'].id" \
+                  --output tsv)
+
+                if [ -n "$customDomainId" ]; then
+                  az afd route create \
+                    --subscription ${{ parameters.hubSubscriptionId }} \
+                    --resource-group sandman-rg-hub \
+                    --profile-name $(hubAfdProfileName) \
+                    --endpoint-name $(hubAfdEndpointName) \
+                    --route-name sandman-${{ parameters.environment }}-route \
+                    --origin-group sandman-${{ parameters.environment }} \
+                    --supported-protocols Http Https \
+                    --forwarding-protocol HttpOnly \
+                    --https-redirect Enabled \
+                    --link-to-default-domain Disabled \
+                    --custom-domains $customDomainId \
+                    || echo "Route already exists, skipping"
+                else
+                  echo "##vso[task.logissue type=warning]No AFD custom domain found for sandman-${{ parameters.environment }}.chalksolutions.com - creating route on the default AFD hostname instead. Provision/validate the custom domain, then re-run to attach it."
+                  az afd route create \
+                    --subscription ${{ parameters.hubSubscriptionId }} \
+                    --resource-group sandman-rg-hub \
+                    --profile-name $(hubAfdProfileName) \
+                    --endpoint-name $(hubAfdEndpointName) \
+                    --route-name sandman-${{ parameters.environment }}-route \
+                    --origin-group sandman-${{ parameters.environment }} \
+                    --supported-protocols Http Https \
+                    --forwarding-protocol HttpOnly \
+                    --https-redirect Enabled \
+                    --link-to-default-domain Enabled \
+                    || echo "Route already exists, skipping"
+                fi
+
           # Reminders
           - task: Bash@3
             displayName: 'Post-Deploy Reminders'
@@ -751,3 +756,4 @@ stages:
               script: |
                 echo "##vso[task.logissue type=warning]MANUAL: Peer OG prod VNet to sandman-vnet-${{ parameters.environment }} if not already done"
                 echo "##vso[task.logissue type=warning]MANUAL: Link private DNS zones to OG prod VNet if not already done"
+                echo "##vso[task.logissue type=warning]MANUAL: No automated image push to the hub ACR exists yet (images are pushed manually from a local machine). Once a push identity (e.g. a future GitHub Action) is decided, grant it AcrPush on sandman-rg-hub's ACR."

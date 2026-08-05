@@ -2,5 +2,4 @@ name: sandman-frontend-uat
 replicaCount: 2
 
 image:
-  repository: sandmanacruat.azurecr.io/cmstx-frontend
   tag: latest

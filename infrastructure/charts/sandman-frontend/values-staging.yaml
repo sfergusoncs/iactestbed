@@ -2,5 +2,4 @@ name: sandman-frontend-staging
 replicaCount: 2
 
 image:
-  repository: sandmanacrstaging.azurecr.io/cmstx-frontend
   tag: latest

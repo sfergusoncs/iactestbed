@@ -2,5 +2,4 @@ name: sandman-frontend-prod
 replicaCount: 3
 
 image:
-  repository: sandmanacrprod.azurecr.io/cmstx-frontend
   tag: latest

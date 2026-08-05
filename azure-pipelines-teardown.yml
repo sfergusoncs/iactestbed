@@ -17,6 +17,11 @@ parameters:
     type: string
     default: ''
 
+  - name: hubSubscriptionId
+    displayName: 'Hub Subscription ID'
+    type: string
+    default: 'c290fb32-8a22-4aeb-9147-d6d4e54071dd'
+
   - name: confirm
     displayName: 'Type the environment name to confirm'
     type: string
@@ -31,6 +36,8 @@ variables:
   location: 'southcentralus'
   resourceGroup: 'sandman-rg-${{ parameters.environment }}'
   rsvRG: 'sandman-rg-rsv-${{ parameters.environment }}'
+  hubAfdProfileName: 'Sandman-AFD'
+  hubAfdEndpointName: 'sandman-afdep'
 
 stages:
 
@@ -59,6 +66,69 @@ stages:
       - job: DeleteResourceGroups
         displayName: 'Delete resource groups'
         steps:
+        # Delete Front Door Route (must go before the origin group it references)
+          - task: AzureCLI@2
+            displayName: 'Delete Front Door Route'
+            inputs:
+              azureSubscription: $(hubServiceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az afd route delete \
+                  --subscription ${{ parameters.hubSubscriptionId }} \
+                  --resource-group sandman-rg-hub \
+                  --profile-name $(hubAfdProfileName) \
+                  --endpoint-name $(hubAfdEndpointName) \
+                  --route-name sandman-${{ parameters.environment }}-route \
+                  --yes || echo "Route not found, skipping"
+
+        # Delete Front Door Origin
+          - task: AzureCLI@2
+            displayName: 'Delete Front Door Origin'
+            inputs:
+              azureSubscription: $(hubServiceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az afd origin delete \
+                  --subscription ${{ parameters.hubSubscriptionId }} \
+                  --resource-group sandman-rg-hub \
+                  --profile-name $(hubAfdProfileName) \
+                  --origin-group-name sandman-${{ parameters.environment }} \
+                  --origin-name sandman-${{ parameters.environment }} \
+                  --yes || echo "Origin not found, skipping"
+
+        # Delete Front Door Origin Group
+          - task: AzureCLI@2
+            displayName: 'Delete Front Door Origin Group'
+            inputs:
+              azureSubscription: $(hubServiceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az afd origin-group delete \
+                  --subscription ${{ parameters.hubSubscriptionId }} \
+                  --resource-group sandman-rg-hub \
+                  --profile-name $(hubAfdProfileName) \
+                  --origin-group-name sandman-${{ parameters.environment }} \
+                  --yes || echo "Origin group not found, skipping"
+
+        # Delete ACR private DNS zone link (spoke VNet is about to be deleted, so
+        # this link would otherwise be left dangling in the hub)
+          - task: AzureCLI@2
+            displayName: 'Delete ACR DNS Zone Link'
+            inputs:
+              azureSubscription: $(hubServiceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az network private-dns link vnet delete \
+                  --subscription ${{ parameters.hubSubscriptionId }} \
+                  --resource-group sandman-rg-hub \
+                  --zone-name privatelink.azurecr.io \
+                  --name sandman-dns-link-acr-${{ parameters.environment }} \
+                  --yes || echo "DNS zone link not found, skipping"
+
         # Delete Hub to Spoke Peering
           - task: AzureCLI@2
             displayName: 'Delete Hub to Spoke Peering'
@@ -154,3 +224,4 @@ stages:
                 echo "##[warning] Resource Group: rg-cmstx-prod-southcentralus-001"
                 echo "##[warning] VNet: <og-prod-vnet-name>"
                 echo "##[warning] Peering name: sandman-peer-to-${{ parameters.environment }}"
+                echo "##[warning] MANUAL: the AFD custom domain for sandman-${{ parameters.environment }}.chalksolutions.com (if provisioned) is not deleted by this pipeline and may need manual cleanup/re-validation before reuse."
