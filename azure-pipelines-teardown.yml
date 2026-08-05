@@ -69,6 +69,8 @@ stages:
         # Delete Front Door Route (must go before the origin group it references)
           - task: AzureCLI@2
             displayName: 'Delete Front Door Route'
+            continueOnError: true
+            condition: succeededOrFailed()
             inputs:
               azureSubscription: $(hubServiceConnection)
               scriptType: 'bash'
@@ -85,6 +87,8 @@ stages:
         # Delete Front Door Origin
           - task: AzureCLI@2
             displayName: 'Delete Front Door Origin'
+            continueOnError: true
+            condition: succeededOrFailed()
             inputs:
               azureSubscription: $(hubServiceConnection)
               scriptType: 'bash'
@@ -101,6 +105,8 @@ stages:
         # Delete Front Door Origin Group
           - task: AzureCLI@2
             displayName: 'Delete Front Door Origin Group'
+            continueOnError: true
+            condition: succeededOrFailed()
             inputs:
               azureSubscription: $(hubServiceConnection)
               scriptType: 'bash'
@@ -117,6 +123,8 @@ stages:
         # this link would otherwise be left dangling in the hub)
           - task: AzureCLI@2
             displayName: 'Delete ACR DNS Zone Link'
+            continueOnError: true
+            condition: succeededOrFailed()
             inputs:
               azureSubscription: $(hubServiceConnection)
               scriptType: 'bash'
@@ -132,6 +140,8 @@ stages:
         # Delete Hub to Spoke Peering
           - task: AzureCLI@2
             displayName: 'Delete Hub to Spoke Peering'
+            continueOnError: true
+            condition: succeededOrFailed()
             inputs:
               azureSubscription: $(hubServiceConnection)
               scriptType: 'bash'
@@ -145,25 +155,41 @@ stages:
         #remove peerings
           - task: AzureCLI@2
             displayName: 'Remove VNet Peerings'
+            continueOnError: true
+            condition: succeededOrFailed()
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                # Get all peerings in the VNet and delete them
-                az network vnet peering list \
+                # Delete peerings one at a time so one failure (e.g. a stale/manually
+                # created peering) doesn't stop the others or hide which one failed.
+                peeringNames=$(az network vnet peering list \
                   --resource-group $(resourceGroup) \
                   --vnet-name sandman-vnet-${{ parameters.environment }} \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --query "[].name" -o tsv | \
-                  xargs -I {} az network vnet peering delete \
-                    --name {} \
+                  --query "[].name" -o tsv 2>/dev/null)
+
+                failed=""
+                for name in $peeringNames; do
+                  if ! az network vnet peering delete \
+                    --name "$name" \
                     --resource-group $(resourceGroup) \
                     --vnet-name sandman-vnet-${{ parameters.environment }} \
-                    --subscription ${{ parameters.subscriptionId }}
+                    --subscription ${{ parameters.subscriptionId }}; then
+                    echo "##vso[task.logissue type=warning]Failed to delete VNet peering '$name' on sandman-vnet-${{ parameters.environment }} - needs manual removal."
+                    failed="$failed $name"
+                  fi
+                done
+
+                if [ -n "$failed" ]; then
+                  echo "##[warning]Peerings that failed to delete:$failed"
+                fi
 
           - task: AzureCLI@2
             displayName: 'List resource groups to be deleted'
+            continueOnError: true
+            condition: succeededOrFailed()
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -182,6 +208,8 @@ stages:
 
           - task: AzureCLI@2
             displayName: 'Delete resource groups'
+            continueOnError: true
+            condition: succeededOrFailed()
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -189,19 +217,32 @@ stages:
               inlineScript: |
                 EXCLUDE="$(rsvRG)"
 
-                az group list \
+                rgNames=$(az group list \
                   --subscription ${{ parameters.subscriptionId }} \
                   --query "[].name" -o tsv | \
-                  grep -v "$EXCLUDE" | \
-                  xargs -I {} az group delete \
-                    --name {} \
-                    --subscription ${{ parameters.subscriptionId }} \
-                    --yes
+                  grep -v "$EXCLUDE")
 
-                echo "Teardown complete. $EXCLUDE preserved."
+                failed=""
+                for name in $rgNames; do
+                  if ! az group delete \
+                    --name "$name" \
+                    --subscription ${{ parameters.subscriptionId }} \
+                    --yes; then
+                    echo "##vso[task.logissue type=warning]Failed to start deletion of resource group '$name' - needs manual removal."
+                    failed="$failed $name"
+                  fi
+                done
+
+                if [ -n "$failed" ]; then
+                  echo "##[warning]Resource groups that failed to delete:$failed"
+                fi
+
+                echo "Teardown complete (deletions are async - Azure removes resources in the background). $EXCLUDE preserved."
 
           - task: AzureCLI@2
             displayName: 'Purge Key Vault'
+            continueOnError: true
+            condition: succeededOrFailed()
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -214,6 +255,7 @@ stages:
 
           - task: AzureCLI@2
             displayName: 'Remind to remove OG Prod peering manually'
+            condition: always()
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -225,3 +267,94 @@ stages:
                 echo "##[warning] VNet: <og-prod-vnet-name>"
                 echo "##[warning] Peering name: sandman-peer-to-${{ parameters.environment }}"
                 echo "##[warning] MANUAL: the AFD custom domain for sandman-${{ parameters.environment }}.chalksolutions.com (if provisioned) is not deleted by this pipeline and may need manual cleanup/re-validation before reuse."
+
+          # Final sweep: check actual Azure state (not just each step's exit code) and
+          # report anything still left behind, since every step above is best-effort
+          # and continues past failures rather than stopping the run.
+          - task: AzureCLI@2
+            displayName: 'Verify Teardown - Hub Side'
+            condition: always()
+            inputs:
+              azureSubscription: $(hubServiceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                echo "Checking hub-side resources for sandman-${{ parameters.environment }}..."
+
+                if az afd route show \
+                    --subscription ${{ parameters.hubSubscriptionId }} \
+                    --resource-group sandman-rg-hub \
+                    --profile-name $(hubAfdProfileName) \
+                    --endpoint-name $(hubAfdEndpointName) \
+                    --route-name sandman-${{ parameters.environment }}-route \
+                    -o none 2>/dev/null; then
+                  echo "##vso[task.logissue type=warning]LEFTOVER: Front Door route 'sandman-${{ parameters.environment }}-route' still exists on endpoint '$(hubAfdEndpointName)' - delete manually."
+                else
+                  echo "OK: Front Door route not found (removed, or hubAfdEndpointName doesn't match the real endpoint - double check if unsure)."
+                fi
+
+                if az afd origin-group show \
+                    --subscription ${{ parameters.hubSubscriptionId }} \
+                    --resource-group sandman-rg-hub \
+                    --profile-name $(hubAfdProfileName) \
+                    --origin-group-name sandman-${{ parameters.environment }} \
+                    -o none 2>/dev/null; then
+                  echo "##vso[task.logissue type=warning]LEFTOVER: Front Door origin group 'sandman-${{ parameters.environment }}' (and its origin) still exists - delete manually."
+                else
+                  echo "OK: Front Door origin group not found."
+                fi
+
+                if az network private-dns link vnet show \
+                    --subscription ${{ parameters.hubSubscriptionId }} \
+                    --resource-group sandman-rg-hub \
+                    --zone-name privatelink.azurecr.io \
+                    --name sandman-dns-link-acr-${{ parameters.environment }} \
+                    -o none 2>/dev/null; then
+                  echo "##vso[task.logissue type=warning]LEFTOVER: ACR private DNS zone link 'sandman-dns-link-acr-${{ parameters.environment }}' still exists - delete manually."
+                else
+                  echo "OK: ACR private DNS zone link not found."
+                fi
+
+                if az network vnet peering show \
+                    --subscription ${{ parameters.hubSubscriptionId }} \
+                    --resource-group sandman-rg-hub \
+                    --vnet-name sandman-vnet-hub \
+                    --name sandman-peer-to-${{ parameters.environment }} \
+                    -o none 2>/dev/null; then
+                  echo "##vso[task.logissue type=warning]LEFTOVER: Hub-to-spoke peering 'sandman-peer-to-${{ parameters.environment }}' still exists on sandman-vnet-hub - delete manually."
+                else
+                  echo "OK: Hub-to-spoke peering not found."
+                fi
+
+          - task: AzureCLI@2
+            displayName: 'Verify Teardown - Spoke Side'
+            condition: always()
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                echo "Checking spoke-side resources for ${{ parameters.environment }}..."
+
+                remainingPeerings=$(az network vnet peering list \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --vnet-name sandman-vnet-${{ parameters.environment }} \
+                  --query "[].name" -o tsv 2>/dev/null)
+
+                if [ -n "$remainingPeerings" ]; then
+                  echo "##vso[task.logissue type=warning]LEFTOVER: VNet peering(s) still present on sandman-vnet-${{ parameters.environment }}: $remainingPeerings - delete manually."
+                else
+                  echo "OK: no VNet peerings remaining (or the VNet/resource group is already gone)."
+                fi
+
+                remainingRgs=$(az group list \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --query "[].name" -o tsv 2>/dev/null | \
+                  grep -v "$(rsvRG)")
+
+                if [ -n "$remainingRgs" ]; then
+                  echo "##[warning]Resource group(s) still present (deletion is async, so this is expected if teardown just ran - re-check in a few minutes; only a real problem if they're still here after that): $remainingRgs"
+                else
+                  echo "OK: no non-RSV resource groups remaining."
+                fi
