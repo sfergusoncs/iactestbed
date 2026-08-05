@@ -1,0 +1,17 @@
+apiVersion: azconfig.io/v1
+kind: AzureAppConfigurationProvider
+metadata:
+  name: sandman-frontend-config
+  namespace: sandman
+spec:
+  endpoint: https://sandman-Appconfig-hub.azconfig.io
+  auth:
+    managedIdentityClientId: 9a78f50b-ce68-4262-980e-22788beb7165
+  configuration:
+    selectors:
+      - keyFilter: "sandman-frontend/runtime-config"
+        labelFilter: "sandbox"
+    trimKeyPrefixes:
+      - "sandman-frontend/"
+  target:
+    configMapName: sandman-frontend-runtime-config

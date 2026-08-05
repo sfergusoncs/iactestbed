@@ -12,31 +12,31 @@ parameters:
       - prod
       - sandbox
 
-
+    
   - name: deployVnet
     displayName: 'Deploy VNet'
     type: boolean
-    default: true
+    default: 'true'
   - name: deployACR
     displayName: 'Deploy ACR'
     type: boolean
-    default: true
+    default: 'true'
   - name: deployRedis
     displayName: 'Deploy Redis'
     type: boolean
-    default: true
+    default: 'true'
   - name: deployAKS
     displayName: 'Deploy AKS'
     type: boolean
-    default: true
+    default: 'true'
   - name: deployBlobCache
     displayName: 'Deploy Blob Cache'
     type: boolean
-    default: true
+    default: 'true'
   - name: deployBlobPerm
     displayName: 'Deploy Blob Perm'
     type: boolean
-    default: true
+    default: 'true'
 
   - name: subscriptionId
     displayName: 'Target Subscription ID'
@@ -46,9 +46,10 @@ parameters:
   - name: hubSubscriptionId
     displayName: 'Hub Subscription ID'
     type: string
-    default: 'c290fb32-8a22-4aeb-9147-d6d4e54071dd'
+    default: 'c290fb32-8a22-4aeb-9147-d6d4e54071dd' 
 
 pool:
+  vmImage: ubuntu-latest
   name: default
 
 variables:
@@ -67,7 +68,7 @@ stages:
     jobs:
       - job: DeployInfrastructure
         steps:
-
+          
           # Create Resource Group
           - task: AzureCLI@2
             displayName: 'Create Resource Group'
@@ -81,9 +82,9 @@ stages:
                   --name $(resourceGroup) \
                   --location $(location)
 
+          
 
-
-
+             
           # Create Key Vault
           - task: AzureCLI@2
             displayName: 'Create Keyvault'
@@ -102,7 +103,7 @@ stages:
                   --tags app=sandman \
                   --retention-days 7 || echo "keyvault already exists, skipping"
 
-              #Create Routetable
+              #Create Routetable    
           - task: AzureCLI@2
             displayName: 'Deploy Route Table'
             inputs:
@@ -121,7 +122,7 @@ stages:
           # Deploy VNet
           - task: AzureCLI@2
             displayName: 'Deploy VNet'
-            condition: and(succeeded(), eq('${{ parameters.deployVnet }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployVnet }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -156,7 +157,7 @@ stages:
           # Deploy ACR
           - task: AzureCLI@2
             displayName: 'Deploy ACR'
-            condition: and(succeeded(), eq('${{ parameters.deployACR }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployACR }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -171,7 +172,7 @@ stages:
 
                 if [ -n "$existing" ]; then
                   echo "ACR already exists, skipping deployment"
-                else
+                else  
                   peSubnetId=$(az network vnet subnet show \
                     --subscription ${{ parameters.subscriptionId }} \
                     --resource-group $(resourceGroup) \
@@ -201,7 +202,7 @@ stages:
           # Deploy Blob Cache Storage
           - task: AzureCLI@2
             displayName: 'Deploy Blob Cache Storage'
-            condition: and(succeeded(), eq('${{ parameters.deployBlobCache }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployBlobCache }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -216,7 +217,7 @@ stages:
 
                 if [ -n "$existing" ]; then
                   echo "blob cache already exists, skipping deployment"
-                else
+                else                
                 peSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
@@ -260,7 +261,7 @@ stages:
           # Deploy Blob Perm Storage
           - task: AzureCLI@2
             displayName: 'Deploy Blob Perm Storage'
-            condition: and(succeeded(), eq('${{ parameters.deployBlobPerm }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployBlobPerm }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -275,7 +276,7 @@ stages:
 
                 if [ -n "$existing" ]; then
                   echo "blob perm already exists, skipping deployment"
-                else
+                else               
                 peSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
@@ -305,7 +306,7 @@ stages:
               # Deploy REDIS
           - task: AzureCLI@2
             displayName: 'Deploy redis'
-            condition: and(succeeded(), eq('${{ parameters.deployRedis }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployRedis }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -320,7 +321,7 @@ stages:
 
                 if [ -n "$existing" ]; then
                   echo "redis already exists, skipping deployment"
-                else
+                else               
                 peSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
@@ -349,7 +350,7 @@ stages:
               # Deploy AKS
           - task: AzureCLI@2
             displayName: 'Deploy AKS'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -375,12 +376,7 @@ stages:
                   --resource-group $(resourceGroup) \
                   --name sandmanacr${{ parameters.environment }} \
                   --query 'id' \
-                  --output tsv 2>/dev/null)
-
-                if [ -z "$acrId" ]; then
-                  echo "##vso[task.logissue type=error]ACR 'sandmanacr${{ parameters.environment }}' not found. Run the pipeline with deployACR=true first."
-                  exit 1
-                fi
+                  --output tsv)
 
                 az deployment group create \
                   --subscription ${{ parameters.subscriptionId }} \
@@ -395,7 +391,7 @@ stages:
               # Assign Network Contributor to AKS UAMI
           - task: AzureCLI@2
             displayName: 'Assign Network Contributor to AKS UAMI'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -416,8 +412,7 @@ stages:
                   --output tsv)
 
                 az role assignment create \
-                  --assignee-object-id $uamiPrincipalId \
-                  --assignee-principal-type ServicePrincipal \
+                  --assignee $uamiPrincipalId \
                   --role 'Network Contributor' \
                   --scope $vnetId \
                   --subscription ${{ parameters.subscriptionId }} || echo "Role assignment already exists, skipping"
@@ -425,7 +420,7 @@ stages:
               # Attach ACR to AKS
           - task: AzureCLI@2
             displayName: 'Attach ACR to AKS'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -445,18 +440,17 @@ stages:
               scriptLocation: 'inlineScript'
               inlineScript: |
                 GROUP_ID=$(az ad group show --group "CSOL_Server_admin" --query id -o tsv)
-
+                
                 az role assignment create \
                   --role "Azure Kubernetes Service RBAC Cluster Admin" \
                   --assignee-object-id $GROUP_ID \
                   --assignee-principal-type Group \
-                  --scope /subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(resourceGroup)/providers/Microsoft.ContainerService/managedClusters/sandman-aks-${{ parameters.environment }} \
-                  || echo "Role assignment already exists, skipping"
+                  --scope /subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(resourceGroup)/providers/Microsoft.ContainerService/managedClusters/sandman-aks-${{ parameters.environment }}
 
            # Assign AcrPush to service connection SP
           - task: AzureCLI@2
             displayName: 'Assign AcrPush to Service Connection SP'
-            condition: and(succeeded(), eq('${{ parameters.deployACR }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployACR }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -483,7 +477,7 @@ stages:
           # Assign AKS RBAC Cluster Admin to service connection SP
           - task: AzureCLI@2
             displayName: 'Assign AKS RBAC Cluster Admin to Service Connection SP'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -498,12 +492,12 @@ stages:
                   --assignee-object-id $SP_OBJECT_ID \
                   --assignee-principal-type ServicePrincipal \
                   --scope /subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(resourceGroup)/providers/Microsoft.ContainerService/managedClusters/sandman-aks-${{ parameters.environment }} \
-                  --subscription ${{ parameters.subscriptionId }} || echo "Role assignment already exists, skipping"
+                  --subscription ${{ parameters.subscriptionId }} || echo "Role assignment already exists, skipping"       
 
           # Get Kubelet Identity Client ID
           - task: AzureCLI@2
             displayName: 'Get Kubelet Identity Client ID'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -530,7 +524,7 @@ stages:
           # Grant App Config Data Reader to Kubelet Identity (cross-subscription)
           - task: AzureCLI@2
             displayName: 'Grant App Config Data Reader to Kubelet Identity'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(hubServiceConnection)
               scriptType: 'bash'
@@ -546,7 +540,7 @@ stages:
           # Install App Configuration Provider
           - task: AzureCLI@2
             displayName: 'Install App Configuration Provider'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -569,14 +563,13 @@ stages:
           # Deploy AzureAppConfigurationProvider resource
           - task: AzureCLI@2
             displayName: 'Deploy App Config Provider Resource'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                kubectl create namespace sandman --dry-run=client -o yaml | kubectl apply -f -
-                cat <<EOF | kubectl apply -f -
+                kubectl apply -f - <<EOF
                 apiVersion: azconfig.io/v1
                 kind: AzureAppConfigurationProvider
                 metadata:
@@ -599,7 +592,7 @@ stages:
           # Deploy Frontend Helm Chart
           - task: AzureCLI@2
             displayName: 'Deploy Frontend Helm Chart'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -615,7 +608,7 @@ stages:
           # Wait for Load Balancer IP
           - task: AzureCLI@2
             displayName: 'Wait for Load Balancer IP'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -623,7 +616,7 @@ stages:
               inlineScript: |
                 echo "Waiting for Load Balancer IP..."
                 for i in {1..20}; do
-                  lbIp=$(kubectl get service sandman-frontend-${{ parameters.environment }}-svc \
+                  lbIp=$(kubectl get service sandman-frontend-sandbox-svc \
                     --namespace sandman \
                     --output jsonpath='{.status.loadBalancer.ingress[0].ip}' 2>/dev/null)
                   if [ -n "$lbIp" ]; then
@@ -643,7 +636,7 @@ stages:
           # Create Private Link Service
           - task: AzureCLI@2
             displayName: 'Create Private Link Service'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(serviceConnection)
               scriptType: 'bash'
@@ -669,7 +662,7 @@ stages:
                   --resource-group $(resourceGroup) \
                   --name sandman-pls-frontend-${{ parameters.environment }} \
                   --vnet-name $(vnetName) \
-                  --subnet $aksSubnetId \
+                  --subnet sandman-snet-aks \
                   --lb-frontend-ip-configs $lbFrontendId \
                   --location $(location) \
                   || echo "Private Link Service already exists, skipping"
@@ -687,26 +680,12 @@ stages:
           # Configure Front Door Origin
           - task: AzureCLI@2
             displayName: 'Configure Front Door Origin'
-            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', true))
             inputs:
               azureSubscription: $(hubServiceConnection)
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                # Ensure the origin group exists before creating the origin
-                az afd origin-group create \
-                  --subscription ${{ parameters.hubSubscriptionId }} \
-                  --resource-group sandman-rg-hub \
-                  --profile-name sandman-afd-hub \
-                  --origin-group-name sandman-frontend-${{ parameters.environment }} \
-                  --probe-request-type GET \
-                  --probe-protocol Http \
-                  --probe-interval-in-seconds 30 \
-                  --probe-path "/" \
-                  --sample-size 4 \
-                  --successful-samples-required 3 \
-                  || echo "Origin group already exists, skipping"
-
                 az afd origin create \
                   --subscription ${{ parameters.hubSubscriptionId }} \
                   --resource-group sandman-rg-hub \
@@ -750,4 +729,4 @@ stages:
               targetType: 'inline'
               script: |
                 echo "##vso[task.logissue type=warning]MANUAL: Peer OG prod VNet to sandman-vnet-${{ parameters.environment }} if not already done"
-                echo "##vso[task.logissue type=warning]MANUAL: Link private DNS zones to OG prod VNet if not already done"
+                echo "##vso[task.logissue type=warning]MANUAL: Link private DNS zones to OG prod VNet if not already done"        

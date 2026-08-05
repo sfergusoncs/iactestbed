@@ -16,7 +16,7 @@ export const options = {
   },
 };
 
-const LOGIN_URL = 'https://skynet-api-staging.chalksolutions.com/api/login/';
+const LOGIN_URL = 'https://sandman-api-staging.chalksolutions.com/api/login/';
 const CREDENTIALS = JSON.stringify({
   username: 'sferguson',
   password: 'iwbi86iSG!@#$%^',

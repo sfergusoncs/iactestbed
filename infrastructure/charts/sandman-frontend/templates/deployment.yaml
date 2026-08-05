@@ -1,21 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sandman-frontend
-  namespace: sandman
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.name }}
 spec:
-  replicas: 2
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: sandman-frontend
+      app: {{ .Values.name }}
   template:
     metadata:
       labels:
-        app: sandman-frontend
+        app: {{ .Values.name }}
     spec:
       containers:
-        - name: sandman-frontend
-          image: sandmanacrsandbox.azurecr.io/frontend/sandman-frontend:sandbox
-          imagePullPolicy: Always
+        - name: {{ .Values.name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 80
+            - containerPort: {{ .Values.service.targetPort }}
+          resources:
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}

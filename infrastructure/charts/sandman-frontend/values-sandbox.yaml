@@ -1,0 +1,14 @@
+name: sandman-frontend-sandbox
+replicaCount: 1
+
+image:
+  repository: sandmanacrsandbox.azurecr.io/frontend/sandman-frontend
+  tag: sandbox
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "250m"
+    memory: "256Mi"

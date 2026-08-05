@@ -1,0 +1,4 @@
+name: sandman-frontend-prod
+replicaCount: 3
+image:
+  tag: prod

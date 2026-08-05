@@ -1,0 +1,13 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "KEY_VAULT_URL": "https://sandman-kv-hub.vault.azure.net/",
+    "ACS_ENDPOINT": "https://comm-prod-tools.unitedstates.communication.azure.com",
+    "SENDER_ADDRESS": "DoNotReply@chalksolutions.com",
+    "DISTRO_RECIPIENTS": "IT@chalksolutions.com",
+    "EXPIRY_THRESHOLD_DAYS": "30",
+    "TIMER_SCHEDULE": "0 0 0 * * *"
+  }
+}
