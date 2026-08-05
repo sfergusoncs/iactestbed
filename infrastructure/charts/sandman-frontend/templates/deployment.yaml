@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}
-  namespace: {{ .Values.namespace }}
+  name: {{ required "name is required" .Values.name }}
+  namespace: {{ required "namespace is required" .Values.namespace }}
   labels:
     app: {{ .Values.name }}
 spec:
@@ -15,9 +15,11 @@ spec:
       labels:
         app: {{ .Values.name }}
     spec:
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
       containers:
         - name: {{ .Values.name }}
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          image: {{ required "image.repository is required" .Values.image.repository }}:{{ required "image.tag is required" .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.targetPort }}
@@ -28,3 +30,14 @@ spec:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}
               memory: {{ .Values.resources.limits.memory }}
+          volumeMounts:
+            - name: runtime-config
+              mountPath: {{ .Values.runtimeConfig.mountPath }}
+              subPath: {{ .Values.runtimeConfig.fileName }}
+      volumes:
+        - name: runtime-config
+          configMap:
+            name: {{ .Values.runtimeConfig.configMapName }}
+            items:
+              - key: {{ .Values.runtimeConfig.configMapKey }}
+                path: {{ .Values.runtimeConfig.fileName }}

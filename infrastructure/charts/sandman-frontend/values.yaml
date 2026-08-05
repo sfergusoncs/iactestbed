@@ -1,15 +1,22 @@
 name: sandman-frontend
 namespace: sandman
-replicaCount: 2
+replicaCount: 1
 
 image:
-  repository: sandmanacrsandbox.azurecr.io/frontend/sandman-frontend
-  tag: latest
   pullPolicy: Always
+
+nodeSelector:
+  kubernetes.io/arch: arm64
 
 service:
   port: 30440
   targetPort: 80
+
+runtimeConfig:
+  configMapName: runtime-config-frontend
+  configMapKey: runtime-config
+  fileName: runtime-config.json
+  mountPath: /usr/share/nginx/html/assets/config/runtime-config.json
 
 resources:
   requests:

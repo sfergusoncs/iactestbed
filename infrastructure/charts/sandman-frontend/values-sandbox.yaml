@@ -2,8 +2,8 @@ name: sandman-frontend-sandbox
 replicaCount: 1
 
 image:
-  repository: sandmanacrsandbox.azurecr.io/frontend/sandman-frontend
-  tag: sandbox
+  repository: sandmanacrsandbox.azurecr.io/cmstx-frontend
+  tag: dev
 
 resources:
   requests:
