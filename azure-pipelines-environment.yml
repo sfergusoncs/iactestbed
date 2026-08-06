@@ -494,6 +494,12 @@ stages:
                   --name sandman-aks-${{ parameters.environment }} \
                   --overwrite-existing
 
+                # This cluster has Azure AD RBAC enabled, so the kubeconfig above
+                # defaults to interactive devicecode auth - convert it to use this
+                # pipeline's own service principal instead, since nothing can
+                # complete a browser login on an unattended agent.
+                kubelogin convert-kubeconfig -l azurecli
+
                 helm repo add azure-app-configuration \
                   https://azure.github.io/AppConfiguration-KubernetesProvider/helm
                 helm repo update
