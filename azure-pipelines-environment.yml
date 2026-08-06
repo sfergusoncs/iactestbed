@@ -57,6 +57,7 @@ variables:
   hubServiceConnection: 'sandman-sc-hub'
   location: 'southcentralus'
   resourceGroup: 'sandman-rg-${{ parameters.environment }}'
+  vnetResourceGroup: 'sandman-rg-${{ parameters.environment }}vnet'
   parametersPath: 'infrastructure/parameters/${{ parameters.environment }}'
   vnetName: 'sandman-vnet-${{ parameters.environment }}'
   hubAcrLoginServer: 'sandmanacrhub-brgyhrbngfbdfhba.azurecr.io'
@@ -84,7 +85,24 @@ stages:
                   --subscription ${{ parameters.subscriptionId }} \
                   --name $(resourceGroup) \
                   --location $(location)
-          
+
+          # Create VNet Resource Group
+          # Kept separate from the main RG so teardown (a blanket delete of the main
+          # RG) never touches the VNet/subnets/route table/peerings - those are free
+          # resources and painful to re-establish (cross-subscription peering,
+          # private DNS zone links, RBAC) if deleted and recreated.
+          - task: AzureCLI@2
+            displayName: 'Create VNet Resource Group'
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az group create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --name $(vnetResourceGroup) \
+                  --location $(location)
+
               #Create Routetable
           - task: AzureCLI@2
             displayName: 'Deploy Route Table'
@@ -95,7 +113,7 @@ stages:
               inlineScript: |
                 az deployment group create \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
+                  --resource-group $(vnetResourceGroup) \
                   --template-file infrastructure/modules/routetable.bicep \
                   --parameters $(parametersPath)/routetable.params.json \
                   --parameters routeTableName=sandman-rt-${{ parameters.environment }} \
@@ -112,7 +130,7 @@ stages:
               inlineScript: |
                 az deployment group create \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
+                  --resource-group $(vnetResourceGroup) \
                   --template-file infrastructure/modules/vnet.bicep \
                   --parameters $(parametersPath)/vnet.params.json \
                   --parameters environment=${{ parameters.environment }} \
@@ -126,13 +144,13 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                echo "Remote VNet: /subscriptions/${{ parameters.subscriptionId }}/resourceGroups/sandman-rg-${{ parameters.environment }}/providers/Microsoft.Network/virtualNetworks/sandman-vnet-${{ parameters.environment }}"
+                echo "Remote VNet: /subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(vnetResourceGroup)/providers/Microsoft.Network/virtualNetworks/sandman-vnet-${{ parameters.environment }}"
 
                 az network vnet peering create \
                   --name sandman-peer-to-${{ parameters.environment }} \
                   --resource-group sandman-rg-hub \
                   --vnet-name sandman-vnet-hub \
-                  --remote-vnet "/subscriptions/${{ parameters.subscriptionId }}/resourceGroups/sandman-rg-${{ parameters.environment }}/providers/Microsoft.Network/virtualNetworks/sandman-vnet-${{ parameters.environment }}" \
+                  --remote-vnet "/subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(vnetResourceGroup)/providers/Microsoft.Network/virtualNetworks/sandman-vnet-${{ parameters.environment }}" \
                   --allow-vnet-access true \
                   --allow-forwarded-traffic true || echo "Peering already exists, skipping"
 
@@ -146,7 +164,7 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                vnetId="/subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(resourceGroup)/providers/Microsoft.Network/virtualNetworks/$(vnetName)"
+                vnetId="/subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(vnetResourceGroup)/providers/Microsoft.Network/virtualNetworks/$(vnetName)"
 
                 az deployment group create \
                   --subscription ${{ parameters.hubSubscriptionId }} \
@@ -177,7 +195,7 @@ stages:
                 else
                 peSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
+                  --resource-group $(vnetResourceGroup) \
                   --vnet-name $(vnetName) \
                   --name sandman-snet-pe \
                   --query 'id' \
@@ -185,7 +203,7 @@ stages:
 
                 vnetId=$(az network vnet show \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
+                  --resource-group $(vnetResourceGroup) \
                   --name $(vnetName) \
                   --query 'id' \
                   --output tsv)
@@ -236,7 +254,7 @@ stages:
                 else
                 peSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
+                  --resource-group $(vnetResourceGroup) \
                   --vnet-name $(vnetName) \
                   --name sandman-snet-pe \
                   --query 'id' \
@@ -244,7 +262,7 @@ stages:
 
                 vnetId=$(az network vnet show \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
+                  --resource-group $(vnetResourceGroup) \
                   --name $(vnetName) \
                   --query 'id' \
                   --output tsv)
@@ -281,7 +299,7 @@ stages:
                 else
                 peSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
+                  --resource-group $(vnetResourceGroup) \
                   --vnet-name $(vnetName) \
                   --name sandman-snet-pe \
                   --query 'id' \
@@ -289,7 +307,7 @@ stages:
 
                 vnetId=$(az network vnet show \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
+                  --resource-group $(vnetResourceGroup) \
                   --name $(vnetName) \
                   --query 'id' \
                   --output tsv)
@@ -315,16 +333,9 @@ stages:
               inlineScript: |
                 aksSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
+                  --resource-group $(vnetResourceGroup) \
                   --vnet-name $(vnetName) \
                   --name sandman-snet-aks \
-                  --query 'id' \
-                  --output tsv)
-
-                vnetId=$(az network vnet show \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
-                  --name $(vnetName) \
                   --query 'id' \
                   --output tsv)
 
@@ -355,7 +366,7 @@ stages:
 
                 vnetId=$(az network vnet show \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
+                  --resource-group $(vnetResourceGroup) \
                   --name $(vnetName) \
                   --query 'id' \
                   --output tsv)
@@ -577,7 +588,7 @@ stages:
               inlineScript: |
                 aksSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
+                  --resource-group $(vnetResourceGroup) \
                   --vnet-name $(vnetName) \
                   --name sandman-snet-aks \
                   --query 'id' \
@@ -590,11 +601,13 @@ stages:
                   --query "[?privateIPAddress=='$(waitForLb.lbIp)'].id" \
                   --output tsv)
 
+                # --subnet is a full resource ID here (spans a different resource
+                # group than this PLS), so --vnet-name is omitted - it's only needed
+                # when --subnet is given as a plain name.
                 az network private-link-service create \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
                   --name sandman-pls-frontend-${{ parameters.environment }} \
-                  --vnet-name $(vnetName) \
                   --subnet $aksSubnetId \
                   --lb-frontend-ip-configs $lbFrontendId \
                   --location $(location) \

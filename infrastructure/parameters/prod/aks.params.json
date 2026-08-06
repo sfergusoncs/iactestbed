@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "systemNodeCount": { "value": 2 },
+    "systemNodeMinCount": { "value": 2 },
+    "systemNodeMaxCount": { "value": 5 },
+    "systemNodeVmSize": { "value": "Standard_D2als_v7" },
+    "userNodeVmSize": { "value": "Standard_D2als_v7" },
+    "kubernetesVersion": { "value": "1.36.1" },
+    "userNodePools": {
+        "value": [
+            {
+            "name": "userpool",
+            "availabilityZones": [ "1", "2", "3" ],
+            "count": 3,
+            "minCount": 3,
+            "maxCount": 5
+            }
+        ]
+    }
+}
+}
