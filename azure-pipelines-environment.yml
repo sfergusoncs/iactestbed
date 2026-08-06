@@ -17,10 +17,6 @@ parameters:
     displayName: 'Deploy VNet'
     type: boolean
     default: true
-  - name: deployACR
-    displayName: 'Deploy ACR'
-    type: boolean
-    default: true
   - name: deployRedis
     displayName: 'Deploy Redis'
     type: boolean
@@ -88,28 +84,7 @@ stages:
                   --subscription ${{ parameters.subscriptionId }} \
                   --name $(resourceGroup) \
                   --location $(location)
-
-
-
-
-          # Create Key Vault
-          - task: AzureCLI@2
-            displayName: 'Create Keyvault'
-            inputs:
-              azureSubscription: $(serviceConnection)
-              scriptType: 'bash'
-              scriptLocation: 'inlineScript'
-              inlineScript: |
-                az keyvault create \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
-                  --name sandman-kv-${{ parameters.environment }} \
-                  --location $(location) \
-                  --enable-rbac-authorization true \
-                  --public-network-access disabled \
-                  --tags app=sandman \
-                  --retention-days 7 || echo "keyvault already exists, skipping"
-
+          
               #Create Routetable
           - task: AzureCLI@2
             displayName: 'Deploy Route Table'
@@ -166,7 +141,6 @@ stages:
           # in CLAUDE.md. This just gives the spoke's pods DNS resolution to it.)
           - task: AzureCLI@2
             displayName: 'Link ACR DNS Zone (hub)'
-            condition: and(succeeded(), eq('${{ parameters.deployACR }}', 'True'))
             inputs:
               azureSubscription: $(hubServiceConnection)
               scriptType: 'bash'
