@@ -48,6 +48,11 @@ parameters:
     type: string
     default: 'c290fb32-8a22-4aeb-9147-d6d4e54071dd'
 
+  - name: imageTag
+    displayName: 'Frontend Image Tag (rollback: set to an older version to redeploy it)'
+    type: string
+    default: 'latest'
+
 pool:
   name: default
 
@@ -555,6 +560,7 @@ stages:
                   ./charts/sandman-frontend \
                   -f ./charts/sandman-frontend/values.yaml \
                   -f ./charts/sandman-frontend/values-${{ parameters.environment }}.yaml \
+                  --set image.tag=${{ parameters.imageTag }} \
                   --namespace sandman \
                   --create-namespace
 

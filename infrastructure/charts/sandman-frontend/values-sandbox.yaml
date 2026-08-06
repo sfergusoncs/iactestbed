@@ -1,9 +1,6 @@
 name: sandman-frontend-sandbox
 replicaCount: 1
 
-image:
-  tag: dev
-
 resources:
   requests:
     cpu: "100m"
