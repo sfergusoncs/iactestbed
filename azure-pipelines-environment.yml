@@ -63,13 +63,14 @@ variables:
   hubAcrLoginServer: 'sandmanacrhub-brgyhrbngfbdfhba.azurecr.io'
   hubAfdProfileName: 'Sandman-AFD'
   hubAfdEndpointName: 'sandman-afdep'
-  # helm/kubelogin are installed via WinGet on the self-hosted agent, which only adds
-  # this Links folder to the *installing user's* PATH - the agent runs as
-  # NetworkService, a separate account that never sees it, even after a service
-  # restart (services capture PATH once at process start, not on every script run).
-  # Referencing this directly sidesteps that instead of fighting agent/service PATH
-  # propagation. Update this if the agent is rebuilt under a different user account.
-  winGetLinksPath: '/c/Users/SFerguson_SA/AppData/Local/Microsoft/WinGet/Links'
+  # helm/kubelogin live in C:\tools on the self-hosted agent. They were originally
+  # installed via WinGet under user SFerguson_SA, but that only put them on the
+  # *installing user's* PATH, in a profile folder NetworkService (the account the
+  # agent runs as) can't even traverse into - neither a System PATH update nor an
+  # agent service restart made them resolvable. Copied to this shared, ACL-neutral
+  # location instead and referenced directly, sidestepping both the PATH and the
+  # profile-permission issue at once.
+  toolsPath: '/c/tools'
   MSYS_NO_PATHCONV: 1
   MSYS2_ARG_CONV_EXCL: '*'
 
@@ -501,7 +502,7 @@ stages:
                   --name sandman-aks-${{ parameters.environment }} \
                   --overwrite-existing
 
-                export PATH="$PATH:$(winGetLinksPath)"
+                export PATH="$PATH:$(toolsPath)"
 
                 # This cluster has Azure AD RBAC enabled, so the kubeconfig above
                 # defaults to interactive devicecode auth - convert it to use this
@@ -556,7 +557,7 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                export PATH="$PATH:$(winGetLinksPath)"
+                export PATH="$PATH:$(toolsPath)"
 
                 helm upgrade --install sandman-frontend \
                   ./charts/sandman-frontend \
