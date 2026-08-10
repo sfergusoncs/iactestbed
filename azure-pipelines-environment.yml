@@ -367,6 +367,45 @@ stages:
                   --parameters aksSubnetId="$aksSubnetId"
                 fi
 
+          # Link AKS Private DNS Zone to Hub
+          # AKS's own "system" private DNS zone (auto-created in the node resource
+          # group) is linked only to this spoke's VNet by default - the self-hosted
+          # agent lives in the hub VNet and can't resolve the cluster's private FQDN
+          # without a second link. Confirmed via Microsoft's own hub-and-spoke
+          # guidance for private AKS clusters. Requires a one-time RBAC grant (see
+          # CLAUDE.md Known Gotchas) - this spoke's service connection SP needs
+          # Private DNS Zone Contributor scoped to sandman-vnet-hub in the hub
+          # subscription, so the virtualNetworks/join/action check succeeds.
+          - task: AzureCLI@2
+            displayName: 'Link AKS Private DNS Zone to Hub'
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                nodeResourceGroup=$(az aks show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name sandman-aks-${{ parameters.environment }} \
+                  --query 'nodeResourceGroup' \
+                  --output tsv)
+
+                aksDnsZoneName=$(az network private-dns zone list \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group "$nodeResourceGroup" \
+                  --query '[0].name' \
+                  --output tsv)
+
+                az network private-dns link vnet create \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group "$nodeResourceGroup" \
+                  --zone-name "$aksDnsZoneName" \
+                  --name sandman-dns-link-aks-hub-${{ parameters.environment }} \
+                  --virtual-network "/subscriptions/${{ parameters.hubSubscriptionId }}/resourceGroups/sandman-rg-hub/providers/Microsoft.Network/virtualNetworks/sandman-vnet-hub" \
+                  --registration-enabled false \
+                  || echo "DNS zone link to hub already exists, skipping"
+
               # Assign Network Contributor to AKS UAMI
           - task: AzureCLI@2
             displayName: 'Assign Network Contributor to AKS UAMI'
@@ -521,11 +560,11 @@ stages:
                 # complete a browser login on an unattended agent.
                 kubelogin convert-kubeconfig -l azurecli
 
-                helm repo add azure-app-configuration \
-                  https://azure.github.io/AppConfiguration-KubernetesProvider/helm
-                helm repo update
+                # Microsoft's docs previously pointed at a classic Helm chart repo
+                # (azure.github.io/AppConfiguration-KubernetesProvider/helm), which
+                # has since been retired (404) in favor of the OCI-based chart below.
                 helm upgrade --install azureappconfiguration.kubernetesprovider \
-                  azure-app-configuration/kubernetes-provider \
+                  oci://mcr.microsoft.com/azure-app-configuration/helmchart/kubernetes-provider \
                   --namespace azappconfig-system \
                   --create-namespace
 
