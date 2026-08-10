@@ -339,6 +339,16 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
+                existing=$(az aks show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name sandman-aks-${{ parameters.environment }} \
+                  --query 'name' \
+                  --output tsv 2>/dev/null)
+
+                if [ -n "$existing" ]; then
+                  echo "AKS cluster already exists, skipping deployment"
+                else
                 aksSubnetId=$(az network vnet subnet show \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(vnetResourceGroup) \
@@ -355,6 +365,7 @@ stages:
                   --parameters environment=${{ parameters.environment }} \
                   --parameters location=$(location) \
                   --parameters aksSubnetId="$aksSubnetId"
+                fi
 
               # Assign Network Contributor to AKS UAMI
           - task: AzureCLI@2
