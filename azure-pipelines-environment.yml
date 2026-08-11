@@ -692,7 +692,7 @@ stages:
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
                   --name sandman-pls-frontend-${{ parameters.environment }} \
-                  --query 'alias' \
+                  --query 'properties.alias || alias' \
                   --output tsv)
 
                 echo "##vso[task.setvariable variable=plsId;isOutput=true]$plsId"
@@ -742,11 +742,13 @@ stages:
 
                 # Approve the private link connection
                 sleep 30
-                connectionId=$(az network private-link-service list-connections \
+                # There is no "list-connections" command - pending connections are a
+                # property of the PLS resource itself, under privateEndpointConnections.
+                connectionId=$(az network private-link-service show \
                   --subscription ${{ parameters.subscriptionId }} \
                   --resource-group $(resourceGroup) \
                   --name sandman-pls-frontend-${{ parameters.environment }} \
-                  --query "[?properties.privateLinkServiceConnectionState.status=='Pending'].name" \
+                  --query "(properties.privateEndpointConnections || privateEndpointConnections)[?properties.privateLinkServiceConnectionState.status=='Pending'].name | [0]" \
                   --output tsv)
 
                 if [ -n "$connectionId" ]; then
@@ -772,14 +774,18 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                customDomainId=$(az afd custom-domain list \
+                # --custom-domains takes the custom domain's *name*, not its full
+                # resource ID (confirmed via az afd route create --help's own
+                # example: "--custom-domains cd001", a bare name, same convention
+                # as --origin-group already using a plain name rather than an ID).
+                customDomainName=$(az afd custom-domain list \
                   --subscription ${{ parameters.hubSubscriptionId }} \
                   --resource-group sandman-rg-hub \
                   --profile-name $(hubAfdProfileName) \
-                  --query "[?hostName=='sandman-${{ parameters.environment }}.chalksolutions.com'].id" \
+                  --query "[?hostName=='sandman-${{ parameters.environment }}.chalksolutions.com'].name | [0]" \
                   --output tsv)
 
-                if [ -n "$customDomainId" ]; then
+                if [ -n "$customDomainName" ]; then
                   az afd route create \
                     --subscription ${{ parameters.hubSubscriptionId }} \
                     --resource-group sandman-rg-hub \
@@ -791,7 +797,7 @@ stages:
                     --forwarding-protocol HttpOnly \
                     --https-redirect Enabled \
                     --link-to-default-domain Disabled \
-                    --custom-domains $customDomainId \
+                    --custom-domains "$customDomainName" \
                     || echo "Route already exists, skipping"
                 else
                   echo "##vso[task.logissue type=warning]No AFD custom domain found for sandman-${{ parameters.environment }}.chalksolutions.com - creating route on the default AFD hostname instead. Provision/validate the custom domain, then re-run to attach it."
