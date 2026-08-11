@@ -610,9 +610,9 @@ stages:
                 export PATH="$PATH:$(toolsPath)"
 
                 helm upgrade --install sandman-frontend \
-                  ./charts/sandman-frontend \
-                  -f ./charts/sandman-frontend/values.yaml \
-                  -f ./charts/sandman-frontend/values-${{ parameters.environment }}.yaml \
+                  ./infrastracture/charts/sandman-frontend \
+                  -f ./infrastracture/charts/sandman-frontend/values.yaml \
+                  -f ./infrastracture/charts/sandman-frontend/values-${{ parameters.environment }}.yaml \
                   --set image.tag=${{ parameters.imageTag }} \
                   --namespace sandman \
                   --create-namespace
