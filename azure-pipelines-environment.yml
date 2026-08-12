@@ -63,6 +63,15 @@ variables:
   hubAcrLoginServer: 'sandmanacrhub-brgyhrbngfbdfhba.azurecr.io'
   hubAfdProfileName: 'Sandman-AFD'
   hubAfdEndpointName: 'sandman-afdep'
+  # Object ID of the App Registration/SP backing hubServiceConnection itself (not a
+  # managed identity on any Azure resource - there's no `az` query to derive this, it
+  # has to be looked up once: `az ad sp show --id <hubServiceConnection's App ID from
+  # its ADO service connection details> --query id -o tsv`). Needed because "Configure
+  # Front Door Origin" calls `az afd origin create --private-link-resource ...` under
+  # this same service connection, and Azure's linked-authorization check requires the
+  # *calling* identity - not AFD's own managed identity - to have read access on the
+  # linked PLS resource. Update this if hubServiceConnection is ever recreated.
+  hubServiceConnectionObjectId: '1eb1a865-d6c5-4c54-9653-adce55472ee9'
   # helm/kubelogin live in C:\tools on the self-hosted agent. They were originally
   # installed via WinGet under user SFerguson_SA, but that only put them on the
   # *installing user's* PATH, in a profile folder NetworkService (the account the
@@ -777,6 +786,43 @@ stages:
                 echo "##vso[task.setvariable variable=plsId;isOutput=true]$plsId"
                 echo "##vso[task.setvariable variable=plsAlias;isOutput=true]$plsAlias"
             name: createPls
+
+          # Grant PLS Read to Hub Service Connection
+          # "Configure Front Door Origin" (next step) calls `az afd origin create
+          # --enable-private-link true --private-link-resource ...` under
+          # hubServiceConnection. Azure's linked-authorization check requires that
+          # same calling identity (not AFD's own managed identity) to have read
+          # access on the linked PLS resource - which lives in this spoke's own
+          # subscription, where hubServiceConnection otherwise has no access at all.
+          # Runs under this spoke's own service connection (already has ample rights
+          # in its own resource group) to grant that read access. The PLS itself
+          # lives in the ephemeral main RG (recreated every teardown/rebuild), so
+          # this runs every deployment rather than being a one-time manual grant.
+          - task: AzureCLI@2
+            displayName: 'Grant PLS Read to Hub Service Connection'
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                existing=$(az role assignment list \
+                  --assignee-object-id $(hubServiceConnectionObjectId) \
+                  --role 'Reader' \
+                  --scope $(createPls.plsId) \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --query '[0].id' --output tsv 2>/dev/null)
+
+                if [ -n "$existing" ]; then
+                  echo "Hub service connection already has Reader on the PLS, skipping"
+                else
+                  az role assignment create \
+                    --assignee-object-id $(hubServiceConnectionObjectId) \
+                    --assignee-principal-type ServicePrincipal \
+                    --role 'Reader' \
+                    --scope $(createPls.plsId) \
+                    --subscription ${{ parameters.subscriptionId }}
+                fi
 
           # Configure Front Door Origin
           - task: AzureCLI@2
