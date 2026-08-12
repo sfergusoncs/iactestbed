@@ -13,7 +13,7 @@
             "addressPrefix": "10.14.0.0/22",
             "delegations": [],
             "privateEndpointNetworkPolicies": "Disabled",
-            "privateLinkServiceNetworkPolicies": "Enabled",
+            "privateLinkServiceNetworkPolicies": "Disabled",
             "applyRouteTable": true
           }
         },    
