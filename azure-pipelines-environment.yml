@@ -850,7 +850,7 @@ stages:
                     --profile-name $(hubAfdProfileName) \
                     --origin-group-name sandman-${{ parameters.environment }} \
                     --probe-request-type GET \
-                    --probe-protocol Http \
+                    --probe-protocol Https \
                     --probe-interval-in-seconds 30 \
                     --probe-path "/" \
                     --sample-size 4 \
@@ -906,8 +906,8 @@ stages:
                     echo "Pending private link connection found: $connectionId"
                     break
                   fi
-                  echo "Attempt $i/20 - no pending connection yet, waiting 15s..."
-                  sleep 15
+                  echo "Attempt $i/20 - no pending connection yet, waiting 45s..."
+                  sleep 45
                 done
 
                 if [ -n "$connectionId" ]; then
