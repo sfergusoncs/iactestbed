@@ -122,6 +122,57 @@ stages:
                   --origin-group-name sandman-${{ parameters.environment }} \
                   --yes || echo "Origin group not found, skipping"
 
+        # Delete Private Endpoint Connection on Frontend PLS
+        # The PLS is attached directly to a frontend IP config on the AKS-created
+        # internal load balancer, which lives in AKS's own auto-created node resource
+        # group (MC_...) - a different RG than the PLS itself. Once AFD's connection
+        # is approved, Azure won't release that frontend IP config's NIC while the
+        # PLS still references it, which blocks the node resource group (and the
+        # whole environment) from tearing down cleanly. Must run before "Delete Main
+        # Resource Group".
+          - task: AzureCLI@2
+            displayName: 'Delete Private Endpoint Connection on Frontend PLS'
+            continueOnError: true
+            condition: succeededOrFailed()
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                connectionName=$(az network private-link-service show \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name sandman-pls-frontend-${{ parameters.environment }} \
+                  --query "(properties.privateEndpointConnections || privateEndpointConnections)[0].name" \
+                  --output tsv 2>/dev/null)
+
+                if [ -n "$connectionName" ]; then
+                  az network private-link-service connection delete \
+                    --subscription ${{ parameters.subscriptionId }} \
+                    --resource-group $(resourceGroup) \
+                    --service-name sandman-pls-frontend-${{ parameters.environment }} \
+                    --name "$connectionName"
+                  echo "Deleted private endpoint connection '$connectionName' on the frontend PLS"
+                else
+                  echo "No PLS/connection found to delete, skipping"
+                fi
+
+        # Delete Private Link Service
+          - task: AzureCLI@2
+            displayName: 'Delete Private Link Service'
+            continueOnError: true
+            condition: succeededOrFailed()
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az network private-link-service delete \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --resource-group $(resourceGroup) \
+                  --name sandman-pls-frontend-${{ parameters.environment }} \
+                  || echo "Private Link Service not found, skipping"
+
         # Delete the main resource group - AKS, Redis, Blob Cache, Blob Perm, and
         # the Private Link Service all live here and go with it. Networking lives in
         # $(vnetResourceGroup) instead and is never targeted by this pipeline.
@@ -223,6 +274,16 @@ stages:
                   echo "##[warning]Main resource group $(resourceGroup) still present (deletion is async, so this is expected right after teardown - re-check in a few minutes; only a real problem if it's still here after that)."
                 else
                   echo "OK: main resource group $(resourceGroup) is gone."
+                fi
+
+                if az network private-link-service show \
+                    --subscription ${{ parameters.subscriptionId }} \
+                    --resource-group $(resourceGroup) \
+                    --name sandman-pls-frontend-${{ parameters.environment }} \
+                    -o none 2>/dev/null; then
+                  echo "##[warning]Frontend PLS 'sandman-pls-frontend-${{ parameters.environment }}' still present (deletion is async, so this is expected right after teardown - re-check in a few minutes; if it persists, its connection may still be blocking deletion - check for a lingering private endpoint connection)."
+                else
+                  echo "OK: frontend PLS is gone (or the main resource group already covered it)."
                 fi
 
                 if az group show --subscription ${{ parameters.subscriptionId }} --name $(vnetResourceGroup) -o none 2>/dev/null; then
