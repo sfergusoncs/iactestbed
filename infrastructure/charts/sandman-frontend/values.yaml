@@ -3,7 +3,7 @@ namespace: sandman
 replicaCount: 1
 
 image:
-  repository: sandmanacrhub-brgyhrbngfbdfhba.azurecr.io/sandman-frontend
+  repository: sandmanacrhub-brgyhrbngfbdfhba.azurecr.io/frontend/sandman-frontend
   tag: latest
   pullPolicy: Always
 

@@ -481,7 +481,7 @@ stages:
           # tenant/environment) shouldn't block the rest of the deployment. Reported
           # in the "Post-Deploy Configuration Summary" step below instead.
           - task: AzureCLI@2
-            displayName: 'Assign AKS Admin Role to CSOL_Server_admin'
+            displayName: 'Assign AKS Admin Role to CSOL_Server_Admin'
             continueOnError: true
             condition: succeededOrFailed()
             inputs:
@@ -489,7 +489,7 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
-                GROUP_ID=$(az ad group show --group "CSOL_Server_admin" --query id -o tsv)
+                GROUP_ID=$(az ad group show --group "CSOL_Server_Admin" --query id -o tsv)
 
                 az role assignment create \
                   --role "Azure Kubernetes Service RBAC Cluster Admin" \
@@ -887,15 +887,28 @@ stages:
                 fi
 
                 # Approve the private link connection
-                sleep 30
-                # There is no "list-connections" command - pending connections are a
-                # property of the PLS resource itself, under privateEndpointConnections.
-                connectionId=$(az network private-link-service show \
-                  --subscription ${{ parameters.subscriptionId }} \
-                  --resource-group $(resourceGroup) \
-                  --name sandman-pls-frontend-${{ parameters.environment }} \
-                  --query "(properties.privateEndpointConnections || privateEndpointConnections)[?properties.privateLinkServiceConnectionState.status=='Pending'].name | [0]" \
-                  --output tsv)
+                # AFD's connection request can take a few minutes to actually appear
+                # on the PLS after the origin is created - a flat 30s sleep-then-check
+                # was often too short in practice, leaving the connection Pending and
+                # requiring manual approval. Poll instead, matching the "Wait for
+                # Load Balancer IP" pattern elsewhere in this pipeline. There is no
+                # "list-connections" command - pending connections are a property of
+                # the PLS resource itself, under privateEndpointConnections.
+                connectionId=""
+                for i in {1..20}; do
+                  connectionId=$(az network private-link-service show \
+                    --subscription ${{ parameters.subscriptionId }} \
+                    --resource-group $(resourceGroup) \
+                    --name sandman-pls-frontend-${{ parameters.environment }} \
+                    --query "(properties.privateEndpointConnections || privateEndpointConnections)[?properties.privateLinkServiceConnectionState.status=='Pending'].name | [0]" \
+                    --output tsv)
+                  if [ -n "$connectionId" ]; then
+                    echo "Pending private link connection found: $connectionId"
+                    break
+                  fi
+                  echo "Attempt $i/20 - no pending connection yet, waiting 15s..."
+                  sleep 15
+                done
 
                 if [ -n "$connectionId" ]; then
                   az network private-link-service connection update \
@@ -904,6 +917,9 @@ stages:
                     --service-name sandman-pls-frontend-${{ parameters.environment }} \
                     --name $connectionId \
                     --connection-status Approved
+                  echo "Approved private link connection $connectionId"
+                else
+                  echo "##vso[task.logissue type=warning]No pending private link connection appeared within 5 minutes - approve manually: az network private-link-service connection update --resource-group $(resourceGroup) --service-name sandman-pls-frontend-${{ parameters.environment }} --name <connection-name> --connection-status Approved"
                 fi
 
           # Create Front Door Route
@@ -976,7 +992,7 @@ stages:
                 echo "##vso[task.logissue type=warning]MANUAL: Link private DNS zones to OG prod VNet if not already done"
                 echo "##vso[task.logissue type=warning]MANUAL: No automated image push to the hub ACR exists yet (images are pushed manually from a local machine). Once a push identity (e.g. a future GitHub Action) is decided, grant it AcrPush on sandman-rg-hub's ACR."
 
-          # These 3 steps (CSOL_Server_admin grant, both branches of Create Front Door
+          # These 3 steps (CSOL_Server_Admin grant, both branches of Create Front Door
           # Route) run with continueOnError - a failure there doesn't stop the run, so
           # check their actual current state here rather than trusting each step's
           # own (possibly green-but-wrong) status.
@@ -990,9 +1006,9 @@ stages:
               inlineScript: |
                 echo "Checking configuration items that continue-on-error rather than fail the pipeline..."
 
-                GROUP_ID=$(az ad group show --group "CSOL_Server_admin" --query id -o tsv 2>/dev/null)
+                GROUP_ID=$(az ad group show --group "CSOL_Server_Admin" --query id -o tsv 2>/dev/null)
                 if [ -z "$GROUP_ID" ]; then
-                  echo "##vso[task.logissue type=warning]MISSING: AD group 'CSOL_Server_admin' not found - AKS admin access for that group was not granted."
+                  echo "##vso[task.logissue type=warning]MISSING: AD group 'CSOL_Server_Admin' not found - AKS admin access for that group was not granted."
                 else
                   existing=$(az role assignment list \
                     --assignee-object-id $GROUP_ID \
@@ -1001,9 +1017,9 @@ stages:
                     --subscription ${{ parameters.subscriptionId }} \
                     --query '[0].id' --output tsv 2>/dev/null)
                   if [ -n "$existing" ]; then
-                    echo "OK: CSOL_Server_admin has AKS RBAC Cluster Admin on sandman-aks-${{ parameters.environment }}."
+                    echo "OK: CSOL_Server_Admin has AKS RBAC Cluster Admin on sandman-aks-${{ parameters.environment }}."
                   else
-                    echo "##vso[task.logissue type=warning]MISSING: CSOL_Server_admin does not have AKS RBAC Cluster Admin on sandman-aks-${{ parameters.environment }} - grant manually."
+                    echo "##vso[task.logissue type=warning]MISSING: CSOL_Server_Admin does not have AKS RBAC Cluster Admin on sandman-aks-${{ parameters.environment }} - grant manually."
                   fi
                 fi
 
