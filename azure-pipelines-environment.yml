@@ -531,6 +531,81 @@ stages:
                     --subscription ${{ parameters.subscriptionId }}
                 fi
 
+          # Get GitHub Runner MI Principal ID
+          # Sandman-MI-ghrunner is a real Azure resource (UAMI attached to the
+          # GitHub Actions self-hosted runner, sndm-vm-ghrun), so its principalId is
+          # looked up dynamically rather than hardcoded - unlike hubServiceConnection's
+          # SP, which has no queryable Azure resource behind it.
+          - task: AzureCLI@2
+            displayName: 'Get GitHub Runner MI Principal ID'
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            inputs:
+              azureSubscription: $(hubServiceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                ghRunnerMiPrincipalId=$(az identity show \
+                  --subscription ${{ parameters.hubSubscriptionId }} \
+                  --resource-group sandman-rg-hub \
+                  --name Sandman-MI-ghrunner \
+                  --query 'principalId' \
+                  --output tsv)
+
+                echo "##vso[task.setvariable variable=ghRunnerMiPrincipalId;isOutput=true]$ghRunnerMiPrincipalId"
+            name: getGhRunnerMi
+
+          # Grant AKS Access to GitHub Runner MI
+          # Sandman-MI-ghrunner needs to deploy to each spoke's AKS cluster from the
+          # GitHub Actions workflow - Cluster User Role to fetch credentials, RBAC
+          # Writer for the actual kubectl/helm-level deploy actions. Mirrors the
+          # existing per-environment AKS RBAC grants already automated here (service
+          # connection SP, CSOL_Server_Admin).
+          - task: AzureCLI@2
+            displayName: 'Grant AKS Access to GitHub Runner MI'
+            condition: and(succeeded(), eq('${{ parameters.deployAKS }}', 'True'))
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                scope=/subscriptions/${{ parameters.subscriptionId }}/resourceGroups/$(resourceGroup)/providers/Microsoft.ContainerService/managedClusters/sandman-aks-${{ parameters.environment }}
+
+                existingUserRole=$(az role assignment list \
+                  --assignee-object-id $(getGhRunnerMi.ghRunnerMiPrincipalId) \
+                  --role "Azure Kubernetes Service Cluster User Role" \
+                  --scope $scope \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --query '[0].id' --output tsv 2>/dev/null)
+
+                if [ -n "$existingUserRole" ]; then
+                  echo "GitHub runner MI already has Cluster User Role, skipping"
+                else
+                  az role assignment create \
+                    --role "Azure Kubernetes Service Cluster User Role" \
+                    --assignee-object-id $(getGhRunnerMi.ghRunnerMiPrincipalId) \
+                    --assignee-principal-type ServicePrincipal \
+                    --scope $scope \
+                    --subscription ${{ parameters.subscriptionId }}
+                fi
+
+                existingRbacWriter=$(az role assignment list \
+                  --assignee-object-id $(getGhRunnerMi.ghRunnerMiPrincipalId) \
+                  --role "Azure Kubernetes Service RBAC Writer" \
+                  --scope $scope \
+                  --subscription ${{ parameters.subscriptionId }} \
+                  --query '[0].id' --output tsv 2>/dev/null)
+
+                if [ -n "$existingRbacWriter" ]; then
+                  echo "GitHub runner MI already has RBAC Writer, skipping"
+                else
+                  az role assignment create \
+                    --role "Azure Kubernetes Service RBAC Writer" \
+                    --assignee-object-id $(getGhRunnerMi.ghRunnerMiPrincipalId) \
+                    --assignee-principal-type ServicePrincipal \
+                    --scope $scope \
+                    --subscription ${{ parameters.subscriptionId }}
+                fi
+
           # Get Kubelet Identity Client ID
           - task: AzureCLI@2
             displayName: 'Get Kubelet Identity Client ID'
