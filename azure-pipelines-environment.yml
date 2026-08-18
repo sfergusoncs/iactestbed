@@ -975,7 +975,7 @@ stages:
                     --subscription ${{ parameters.subscriptionId }} \
                     --resource-group $(resourceGroup) \
                     --name sandman-pls-frontend-${{ parameters.environment }} \
-                    --query "(properties.privateEndpointConnections || privateEndpointConnections)[?properties.privateLinkServiceConnectionState.status=='Pending'].name | [0]" \
+                    --query "(properties.privateEndpointConnections || privateEndpointConnections)[?(properties.privateLinkServiceConnectionState.status || privateLinkServiceConnectionState.status)=='Pending'].name | [0]" \
                     --output tsv)
                   if [ -n "$connectionId" ]; then
                     echo "Pending private link connection found: $connectionId"
